@@ -1,0 +1,377 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "AbrilFatface-Regular";
+    src: url("/AbrilFatface-Regular.ttf");
+}
+
+@font-face {
+    font-family: "REM-VariableFont_wght";
+    src: url("/REM-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Lora-VariableFont_wght";
+    src: url("/Lora-VariableFont_wght.ttf");
+}
+
+/* ========================================
+   BASE STYLES - Mobile First
+   ======================================== */
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    @apply font-sans;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    body {
+        @apply antialiased bg-background text-foreground;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+  .theme {
+        --font-heading: var(--font-sans);
+        --font-sans: var(--font-sans);
+    }
+  :root {
+        --background: oklch(1 0 0);
+        --foreground: oklch(0.145 0 0);
+        --card: oklch(1 0 0);
+        --card-foreground: oklch(0.145 0 0);
+        --popover: oklch(1 0 0);
+        --popover-foreground: oklch(0.145 0 0);
+        --primary: oklch(0.205 0 0);
+        --primary-foreground: oklch(0.985 0 0);
+        --secondary: oklch(0.97 0 0);
+        --secondary-foreground: oklch(0.205 0 0);
+        --muted: oklch(0.97 0 0);
+        --muted-foreground: oklch(0.556 0 0);
+        --accent: oklch(0.97 0 0);
+        --accent-foreground: oklch(0.205 0 0);
+        --destructive: oklch(0.577 0.245 27.325);
+        --border: oklch(0.922 0 0);
+        --input: oklch(0.922 0 0);
+        --ring: oklch(0.708 0 0);
+        --chart-1: oklch(0.87 0 0);
+        --chart-2: oklch(0.556 0 0);
+        --chart-3: oklch(0.439 0 0);
+        --chart-4: oklch(0.371 0 0);
+        --chart-5: oklch(0.269 0 0);
+        --radius: 0.625rem;
+        --sidebar: oklch(0.985 0 0);
+        --sidebar-foreground: oklch(0.145 0 0);
+        --sidebar-primary: oklch(0.205 0 0);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.97 0 0);
+        --sidebar-accent-foreground: oklch(0.205 0 0);
+        --sidebar-border: oklch(0.922 0 0);
+        --sidebar-ring: oklch(0.708 0 0);
+    }
+  .dark {
+        --background: oklch(0.145 0 0);
+        --foreground: oklch(0.985 0 0);
+        --card: oklch(0.205 0 0);
+        --card-foreground: oklch(0.985 0 0);
+        --popover: oklch(0.205 0 0);
+        --popover-foreground: oklch(0.985 0 0);
+        --primary: oklch(0.922 0 0);
+        --primary-foreground: oklch(0.205 0 0);
+        --secondary: oklch(0.269 0 0);
+        --secondary-foreground: oklch(0.985 0 0);
+        --muted: oklch(0.269 0 0);
+        --muted-foreground: oklch(0.708 0 0);
+        --accent: oklch(0.269 0 0);
+        --accent-foreground: oklch(0.985 0 0);
+        --destructive: oklch(0.704 0.191 22.216);
+        --border: oklch(1 0 0 / 10%);
+        --input: oklch(1 0 0 / 15%);
+        --ring: oklch(0.556 0 0);
+        --chart-1: oklch(0.87 0 0);
+        --chart-2: oklch(0.556 0 0);
+        --chart-3: oklch(0.439 0 0);
+        --chart-4: oklch(0.371 0 0);
+        --chart-5: oklch(0.269 0 0);
+        --sidebar: oklch(0.205 0 0);
+        --sidebar-foreground: oklch(0.985 0 0);
+        --sidebar-primary: oklch(0.488 0.243 264.376);
+        --sidebar-primary-foreground: oklch(0.985 0 0);
+        --sidebar-accent: oklch(0.269 0 0);
+        --sidebar-accent-foreground: oklch(0.985 0 0);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.556 0 0);
+    }
+  * {
+    @apply border-border outline-ring/50;
+    }
+}
+
+/* ========================================
+   COMPONENT UTILITIES
+   ======================================== */
+
+@layer components {
+    /* Container - Mobile First */
+    .container-main {
+        @apply w-full mx-auto;
+        @apply px-4 sm:px-6 lg:px-8;
+        @apply max-w-7xl;
+    }
+
+    /* Section Spacing - Mobile First */
+    .section-padding {
+        @apply py-12 sm:py-16 md:py-20 lg:py-24;
+    }
+
+    /* Text Width Control */
+    .text-readable {
+        @apply max-w-[36ch] sm:max-w-prose lg:max-w-2xl;
+    }
+
+    /* Card Base */
+    .card-base {
+        @apply rounded-2xl shadow-md p-4 sm:p-6;
+        @apply bg-white;
+    }
+
+    /* CTA Button Base */
+    .btn-primary {
+        @apply w-full sm:w-auto;
+        @apply h-12 sm:h-14;
+        @apply px-6 sm:px-8;
+        @apply rounded-full;
+        @apply font-bold text-sm sm:text-base;
+        @apply uppercase tracking-wider;
+        @apply bg-primary hover:bg-primarydark;
+        @apply text-white;
+        @apply shadow-lg hover:shadow-xl;
+        @apply transition-all duration-300;
+        @apply hover:scale-105;
+        @apply flex items-center justify-center gap-2 sm:gap-3;
+    }
+
+    .btn-secondary {
+        @apply w-full sm:w-auto;
+        @apply h-12 sm:h-14;
+        @apply px-6 sm:px-8;
+        @apply rounded-full;
+        @apply font-bold text-sm sm:text-base;
+        @apply uppercase tracking-wider;
+        @apply bg-white hover:bg-gray-50;
+        @apply text-primarydark;
+        @apply border border-gray-200;
+        @apply shadow-lg hover:shadow-xl;
+        @apply transition-all duration-300;
+        @apply hover:scale-105;
+        @apply flex items-center justify-center gap-2 sm:gap-3;
+    }
+
+    /* Section Badge */
+    .section-badge {
+        @apply flex items-center gap-2;
+        @apply text-xs sm:text-sm font-bold uppercase tracking-wider;
+    }
+
+    .section-badge-dot {
+        @apply w-2 h-2 rounded-full;
+    }
+
+    /* Horizontal Scroll Container */
+    .scroll-horizontal {
+        @apply flex gap-4 sm:gap-6;
+        @apply overflow-x-auto;
+        @apply snap-x snap-mandatory;
+        @apply -mx-4 px-4 sm:-mx-6 sm:px-6;
+        @apply pb-4;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .scroll-horizontal::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scroll-horizontal > * {
+        @apply snap-center shrink-0;
+    }
+
+    /* Highlight Text */
+    .text-highlight {
+        @apply relative inline-block;
+    }
+
+    .text-highlight::after {
+        content: '';
+        @apply absolute bottom-0 left-0 w-full;
+        @apply h-2 sm:h-3;
+        @apply bg-secondary/70;
+        @apply -z-10 rounded-sm;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+@layer utilities {
+    /* Hide scrollbar */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Aspect Ratios */
+    .aspect-4\/3 {
+        aspect-ratio: 4 / 3;
+    }
+
+    .aspect-3\/2 {
+        aspect-ratio: 3 / 2;
+    }
+
+    .aspect-3\/1 {
+        aspect-ratio: 3 / 1;
+    }
+
+    /* Text Balance */
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /* Safe area padding for mobile */
+    .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .safe-top {
+        padding-top: env(safe-area-inset-top);
+    }
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #525151;
+}
+
+/* ========================================
+   FONT UTILITIES
+   ======================================== */
+
+.regular {
+    font-style: normal;
+}
+
+/* ========================================
+   ANIMATION CLASSES
+   ======================================== */
+
+@layer utilities {
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-scale-in {
+        animation: scaleIn 0.5s ease-out forwards;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Loading bar animation */
+@keyframes loading-bar {
+    0% {
+        width: 0%;
+        margin-left: 0%;
+    }
+    50% {
+        width: 50%;
+        margin-left: 25%;
+    }
+    100% {
+        width: 0%;
+        margin-left: 100%;
+    }
+}
+
+.animate-loading-bar {
+    animation: loading-bar 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-loading-bar {
+        animation: none;
+        width: 100%;
+        margin-left: 0;
+    }
+}
