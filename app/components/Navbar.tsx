@@ -7,26 +7,33 @@ import { getCurrentPriceTier, getActiveSubjects } from "@/app/lib/pricing";
 
 function useDeadlineCountdown() {
     const getTimeLeft = () => {
-        const now = new Date();
         const tier = getCurrentPriceTier();
+        const now = new Date();
         const next = tier.deadlineDate;
         const diff = Math.max(0, next.getTime() - now.getTime());
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        return { days, hours, minutes, seconds };
+        return {
+            days, hours, minutes, seconds,
+            tierLabel: tier.label,
+            deadlineLabel: tier.deadlineLabel,
+        };
     };
 
-    const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const [state, setState] = useState({
+        days: 0, hours: 0, minutes: 0, seconds: 0,
+        tierLabel: "", deadlineLabel: "",
+    });
 
     useEffect(() => {
-        setTimeLeft(getTimeLeft());
-        const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+        setState(getTimeLeft());
+        const id = setInterval(() => setState(getTimeLeft()), 1000);
         return () => clearInterval(id);
     }, []);
 
-    return timeLeft;
+    return state;
 }
 
 function CountdownBlock({ value, label }: { value: number; label: string }) {
@@ -43,7 +50,7 @@ function CountdownBlock({ value, label }: { value: number; label: string }) {
 }
 
 function NavCountdown({ dark }: { dark?: boolean }) {
-    const { days, hours, minutes, seconds } = useDeadlineCountdown();
+    const { days, hours, minutes, seconds, tierLabel, deadlineLabel } = useDeadlineCountdown();
     const wrapperClasses = dark
         ? "border-black/10 bg-black/5 text-black"
         : "border-[#CEFF06]/30 bg-[#CEFF06]/5 text-[#CEFF06]";
@@ -54,13 +61,16 @@ function NavCountdown({ dark }: { dark?: boolean }) {
                 ${dark ? "bg-black/20" : "bg-[#CEFF06]/40"} animate-pulse`}
             />
 
-            <div className={`relative flex items-center gap-2 md:gap-3 lg:gap-4 px-3 md:px-5 py-1.5 md:py-2 rounded-2xl border backdrop-blur-sm transition-colors duration-300 ${wrapperClasses}`}>
+            <div className={`relative flex flex-col md:flex-row items-center gap-1.5 md:gap-3 lg:gap-4 px-3 md:px-5 py-1.5 md:py-2 rounded-2xl border backdrop-blur-sm transition-colors duration-300 ${wrapperClasses}`}>
+                <span className="block md:hidden text-[7px] uppercase tracking-[0.15em] font-bold leading-none opacity-80">
+                    {tierLabel ? `${tierLabel} — ${deadlineLabel}-ig` : "Jelentkezési határidő"}
+                </span>
                 <div className="hidden md:flex flex-col items-start mr-1">
-                    <span className="text-[10px] uppercase tracking-[0.12em] font-bold leading-tight">
-                        Jelentkezési
+                    <span className="text-[9px] uppercase tracking-[0.12em] font-bold leading-tight opacity-70">
+                        {tierLabel || "Jelentkezési határidő"}
                     </span>
                     <span className="text-[10px] uppercase tracking-[0.12em] font-bold leading-tight">
-                        határidő
+                        {deadlineLabel ? `${deadlineLabel}-ig` : "határidő"}
                     </span>
                 </div>
                 <div className={`hidden md:block w-px h-7 ${dark ? "bg-black/20" : "bg-[#CEFF06]/30"}`} />

@@ -38,9 +38,6 @@ const STEPS = [
 function StepCard({ step }: { step: typeof STEPS[0] }) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             className="group relative flex flex-col bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-black/5"
         >
             <div className="relative h-64 md:h-72 overflow-hidden">
