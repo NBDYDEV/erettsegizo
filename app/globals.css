@@ -1,134 +1,33 @@
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: "AbrilFatface-Regular";
-    src: url("/AbrilFatface-Regular.ttf");
+html {
+    scroll-behavior: smooth;
 }
 
 @font-face {
-    font-family: "REM-VariableFont_wght";
-    src: url("/REM-VariableFont_wght.ttf");
+    font-family: "Poppins-Medium";
+    src: url("/fonts/Poppins-Medium.ttf");
 }
 
 @font-face {
-    font-family: "Lora-VariableFont_wght";
-    src: url("/Lora-VariableFont_wght.ttf");
+    font-family: "Poppins-SemiBold";
+    src: url("/fonts/Poppins-SemiBold.ttf");
 }
 
-/* ========================================
-   BASE STYLES - Mobile First
-   ======================================== */
-
-@layer base {
-    html {
-        scroll-behavior: smooth;
-    @apply font-sans;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        html {
-            scroll-behavior: auto;
-        }
-
-        *,
-        *::before,
-        *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-    }
-
-    body {
-        @apply antialiased bg-background text-foreground;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-  .theme {
-        --font-heading: var(--font-sans);
-        --font-sans: var(--font-sans);
-    }
-  :root {
-        --background: oklch(1 0 0);
-        --foreground: oklch(0.145 0 0);
-        --card: oklch(1 0 0);
-        --card-foreground: oklch(0.145 0 0);
-        --popover: oklch(1 0 0);
-        --popover-foreground: oklch(0.145 0 0);
-        --primary: oklch(0.205 0 0);
-        --primary-foreground: oklch(0.985 0 0);
-        --secondary: oklch(0.97 0 0);
-        --secondary-foreground: oklch(0.205 0 0);
-        --muted: oklch(0.97 0 0);
-        --muted-foreground: oklch(0.556 0 0);
-        --accent: oklch(0.97 0 0);
-        --accent-foreground: oklch(0.205 0 0);
-        --destructive: oklch(0.577 0.245 27.325);
-        --border: oklch(0.922 0 0);
-        --input: oklch(0.922 0 0);
-        --ring: oklch(0.708 0 0);
-        --chart-1: oklch(0.87 0 0);
-        --chart-2: oklch(0.556 0 0);
-        --chart-3: oklch(0.439 0 0);
-        --chart-4: oklch(0.371 0 0);
-        --chart-5: oklch(0.269 0 0);
-        --radius: 0.625rem;
-        --sidebar: oklch(0.985 0 0);
-        --sidebar-foreground: oklch(0.145 0 0);
-        --sidebar-primary: oklch(0.205 0 0);
-        --sidebar-primary-foreground: oklch(0.985 0 0);
-        --sidebar-accent: oklch(0.97 0 0);
-        --sidebar-accent-foreground: oklch(0.205 0 0);
-        --sidebar-border: oklch(0.922 0 0);
-        --sidebar-ring: oklch(0.708 0 0);
-    }
-  .dark {
-        --background: oklch(0.145 0 0);
-        --foreground: oklch(0.985 0 0);
-        --card: oklch(0.205 0 0);
-        --card-foreground: oklch(0.985 0 0);
-        --popover: oklch(0.205 0 0);
-        --popover-foreground: oklch(0.985 0 0);
-        --primary: oklch(0.922 0 0);
-        --primary-foreground: oklch(0.205 0 0);
-        --secondary: oklch(0.269 0 0);
-        --secondary-foreground: oklch(0.985 0 0);
-        --muted: oklch(0.269 0 0);
-        --muted-foreground: oklch(0.708 0 0);
-        --accent: oklch(0.269 0 0);
-        --accent-foreground: oklch(0.985 0 0);
-        --destructive: oklch(0.704 0.191 22.216);
-        --border: oklch(1 0 0 / 10%);
-        --input: oklch(1 0 0 / 15%);
-        --ring: oklch(0.556 0 0);
-        --chart-1: oklch(0.87 0 0);
-        --chart-2: oklch(0.556 0 0);
-        --chart-3: oklch(0.439 0 0);
-        --chart-4: oklch(0.371 0 0);
-        --chart-5: oklch(0.269 0 0);
-        --sidebar: oklch(0.205 0 0);
-        --sidebar-foreground: oklch(0.985 0 0);
-        --sidebar-primary: oklch(0.488 0.243 264.376);
-        --sidebar-primary-foreground: oklch(0.985 0 0);
-        --sidebar-accent: oklch(0.269 0 0);
-        --sidebar-accent-foreground: oklch(0.985 0 0);
-        --sidebar-border: oklch(1 0 0 / 10%);
-        --sidebar-ring: oklch(0.556 0 0);
-    }
-  * {
-    @apply border-border outline-ring/50;
-    }
+@font-face {
+    font-family: "Poppins-ExtraBold";
+    src: url("/fonts/Poppins-ExtraBold.ttf");
 }
 
-/* ========================================
-   COMPONENT UTILITIES
-   ======================================== */
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url("/fonts/Poppins-Bold.ttf");
+}
 
 @layer components {
+
     /* Container - Mobile First */
     .container-main {
         @apply w-full mx-auto;
@@ -209,7 +108,7 @@
         display: none;
     }
 
-    .scroll-horizontal > * {
+    .scroll-horizontal>* {
         @apply snap-center shrink-0;
     }
 
@@ -232,6 +131,7 @@
    ======================================== */
 
 @layer utilities {
+
     /* Hide scrollbar */
     .scrollbar-hide {
         -ms-overflow-style: none;
@@ -321,6 +221,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -331,6 +232,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -342,6 +244,7 @@
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -354,10 +257,12 @@
         width: 0%;
         margin-left: 0%;
     }
+
     50% {
         width: 50%;
         margin-left: 25%;
     }
+
     100% {
         width: 0%;
         margin-left: 100%;

@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'api.netbazis.com'
+        hostname: 'images.unsplash.com'
       }
     ]
   },/*  */
