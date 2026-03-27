@@ -69,10 +69,6 @@ export default function FAQ2() {
                             transition={{ duration: 0.5, delay: 0.1 }}
                             className="flex flex-col sm:flex-row items-stretch gap-3 sm:gap-4"
                         >
-                            <button className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg">
-                                <span>Jelentkezem {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}-ért</span>
-                                {tier.isCombo && <span className="text-xs opacity-80 mt-1">(Töri + Magyar ismétlés)</span>}
-                            </button>
                             <button className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#ff3b30] text-white font-poppins-bold text-sm sm:text-base hover:bg-[#e7625b] hover:scale-105 transition-colors duration-200 whitespace-nowrap">
                                 Jelentkezem {tier ? formatPrice(tier.isCombo ? tier.comboPrice : tier.price) : "..."}-ért
                             </button>

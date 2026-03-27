@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useSpring, useMotionValue } from "motion/react";
+import { motion, useSpring, useMotionValue, useInView } from "motion/react";
 import { ReactLenis } from "lenis/react";
 import { cn } from "@/lib/utils";
 
@@ -63,6 +63,8 @@ const Device = React.forwardRef<HTMLDivElement, DeviceProps>(
     const rotateY = useMotionValue(0);
     const rotateZ = useMotionValue(0);
 
+    const isInView = useInView(deviceRef);
+
     const springX = useSpring(x, {
       stiffness: 200,
       damping: 25,
@@ -90,7 +92,7 @@ const Device = React.forwardRef<HTMLDivElement, DeviceProps>(
     });
 
     useEffect(() => {
-      if (!autoAnimate) return;
+      if (!autoAnimate || !isInView) return;
 
       let time = 0;
       const animate = () => {
@@ -131,6 +133,7 @@ const Device = React.forwardRef<HTMLDivElement, DeviceProps>(
       rotateX,
       rotateY,
       rotateZ,
+      isInView,
     ]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

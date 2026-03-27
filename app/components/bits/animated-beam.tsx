@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useId, useMemo, useState, type RefObject } from "react"
-import { motion, type MotionValue } from "motion/react"
+import { motion, type MotionValue, useTransform } from "motion/react"
 import { cn } from "@/lib/utils"
 
 export interface AnimatedBeamProps {
@@ -75,15 +75,9 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   const [pathD, setPathD] = useState("")
   const [bezier, setBezier] = useState<BezierPoints>({ sx: 0, sy: 0, cx: 0, cy: 0, ex: 0, ey: 0 })
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 })
-  const [scrollP, setScrollP] = useState(0)
-
+  // Using Framer Motion directly via useTransform, we don't need a React state `scrollP` update on every frame.
+  // We still provide a fallback for gradient coordinates if needed.
   const isScrollDriven = !!scrollProgress
-
-  useEffect(() => {
-    if (!scrollProgress) return
-    const unsub = scrollProgress.on("change", setScrollP)
-    return unsub
-  }, [scrollProgress])
 
   const gradientCoordinates = reverse
     ? { x1: ["90%", "-10%"], x2: ["100%", "0%"], y1: ["0%", "0%"], y2: ["0%", "0%"] }
@@ -131,27 +125,53 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     return () => resizeObserver.disconnect()
   }, [containerRef, fromRef, toRef, curvature, startXOffset, startYOffset, endXOffset, endYOffset])
 
-  const scrollGradientX1 = `${10 + scrollP * 100}%`
-  const scrollGradientX2 = `${scrollP * 100}%`
+  const ScrollParticleLayer = () => {
+    if (!isScrollDriven || !showParticles || !scrollProgress) return null;
 
-  const scrollParticleData = useMemo(() => {
-    if (!isScrollDriven || !showParticles) return []
-    return particles.map((p) => {
-      const t = Math.max(0, Math.min(1, scrollP - p.trailOffset))
-      if (t <= 0.005) return null
-      const pos = bezierPoint(t, bezier)
-      const headT = Math.min(1, scrollP)
-      const distFromHead = Math.abs(headT - t)
-      const fade = Math.max(0, 1 - distFromHead / 0.15)
-      return {
-        ...p,
-        cx: pos.x + p.offsetX,
-        cy: pos.y + p.offsetY,
-        computedOpacity: p.opacity * fade * (scrollP > 0.01 ? 1 : 0),
-        computedSize: p.size * (0.5 + fade * 0.5),
-      }
-    }).filter(Boolean)
-  }, [isScrollDriven, showParticles, scrollP, bezier, particles])
+    return (
+      <>
+        {particles.map((p) => {
+          const cx = useTransform(scrollProgress, (scrollP) => {
+            const t = Math.max(0, Math.min(1, scrollP - p.trailOffset));
+            if (t <= 0.005) return -1000;
+            return bezierPoint(t, bezier).x + p.offsetX;
+          });
+          const cy = useTransform(scrollProgress, (scrollP) => {
+            const t = Math.max(0, Math.min(1, scrollP - p.trailOffset));
+            if (t <= 0.005) return -1000;
+            return bezierPoint(t, bezier).y + p.offsetY;
+          });
+          const r = useTransform(scrollProgress, (scrollP) => {
+            const t = Math.max(0, Math.min(1, scrollP - p.trailOffset));
+            if (t <= 0.005) return 0;
+            const headT = Math.min(1, scrollP);
+            const distFromHead = Math.abs(headT - t);
+            const fade = Math.max(0, 1 - distFromHead / 0.15);
+            return p.size * (0.5 + fade * 0.5);
+          });
+          const opacity = useTransform(scrollProgress, (scrollP) => {
+             const t = Math.max(0, Math.min(1, scrollP - p.trailOffset));
+             if (t <= 0.005 || scrollP <= 0.01) return 0;
+             const headT = Math.min(1, scrollP);
+             const distFromHead = Math.abs(headT - t);
+             const fade = Math.max(0, 1 - distFromHead / 0.15);
+             return p.opacity * fade;
+          });
+
+          return (
+            <motion.circle
+              key={p.id}
+              cx={cx}
+              cy={cy}
+              r={r}
+              opacity={opacity}
+              fill={gradientStopColor}
+            />
+          );
+        })}
+      </>
+    );
+  };
 
   return (
     <svg
@@ -164,31 +184,13 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     >
       <defs>
 
-        {showParticles && (
-          <filter id={`${id}-glow`}>
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        )}
+        {/* Intentionally removed SVG filter 'feGaussianBlur' to improve scroll performance on mobile & desktop */}
       </defs>
 
       <path d={pathD} stroke={pathColor} strokeWidth={pathWidth} strokeOpacity={pathOpacity} strokeLinecap="round" />
       <path d={pathD} strokeWidth={pathWidth} stroke={`url(#${id})`} strokeOpacity="1" strokeLinecap="round" />
 
-      {isScrollDriven && showParticles && scrollParticleData.map((p: any) => (
-        <circle
-          key={p.id}
-          cx={p.cx}
-          cy={p.cy}
-          r={p.computedSize}
-          fill={gradientStopColor}
-          opacity={p.computedOpacity}
-          filter={`url(#${id}-glow)`}
-        />
-      ))}
+      <ScrollParticleLayer />
 
       {!isScrollDriven && showParticles && pathD && particles.map((p) => {
         const particleDur = duration * (0.35 + Math.random() * 0.25)
@@ -199,7 +201,6 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             r={p.size}
             fill={gradientStopColor}
             opacity={0}
-            filter={`url(#${id}-glow)`}
             transform={`translate(${p.offsetX}, ${p.offsetY})`}
           >
             <animateMotion

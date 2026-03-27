@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef, useRef, useMemo, useState, useEffect } from "react";
-import { useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
     Hourglass,
@@ -99,7 +99,7 @@ function BrainBurstScroll({
     count = 10,
 }: {
     color: string;
-    progress: number;
+    progress: import("motion/react").MotionValue<number>;
     threshold: number;
     count?: number;
 }) {
@@ -121,30 +121,40 @@ function BrainBurstScroll({
 
     if (!mounted) return null;
 
-    const burstProgress = Math.max(0, Math.min(1, (progress - threshold) / 0.08));
-    if (burstProgress <= 0) return null;
-
-    const fadeOut = burstProgress > 0.5 ? 1 - (burstProgress - 0.5) / 0.5 : 1;
-    const scale = 0.3 + burstProgress * 0.7;
+    // Instead of using React state and rerendering every frame, we map directly with useTransform
+    const burstProgress = useTransform(progress, (p) => Math.max(0, Math.min(1, (p - threshold) / 0.08)));
+    const scale = useTransform(burstProgress, (bp) => 0.3 + bp * 0.7);
+    const fadeOut = useTransform(burstProgress, (bp) => (bp > 0.5 ? 1 - (bp - 0.5) / 0.5 : 1));
+    const finalOpacity = useTransform(
+        [burstProgress, fadeOut],
+        ([bp, fo]: any) => (bp <= 0 ? 0 : fo * 0.9)
+    );
 
     return (
         <div className="pointer-events-none absolute inset-0 overflow-visible z-[5]">
-            {particles.map((p) => (
-                <div
-                    key={p.id}
-                    className="absolute rounded-full"
-                    style={{
-                        width: p.size,
-                        height: p.size,
-                        left: `calc(50% - ${p.size / 2}px)`,
-                        top: `calc(50% - ${p.size / 2}px)`,
-                        backgroundColor: color,
-                        boxShadow: `0 0 ${p.size * 3}px ${color}, 0 0 ${p.size * 6}px ${color}40`,
-                        opacity: fadeOut * 0.9,
-                        transform: `translate(${p.driftX * burstProgress}px, ${p.driftY * burstProgress}px) scale(${scale})`,
-                    }}
-                />
-            ))}
+            {particles.map((p) => {
+                const xTransform = useTransform(burstProgress, (bp) => p.driftX * bp);
+                const yTransform = useTransform(burstProgress, (bp) => p.driftY * bp);
+
+                return (
+                    <motion.div
+                        key={p.id}
+                        className="absolute rounded-full"
+                        style={{
+                            width: p.size,
+                            height: p.size,
+                            left: `calc(50% - ${p.size / 2}px)`,
+                            top: `calc(50% - ${p.size / 2}px)`,
+                            backgroundColor: color,
+                            boxShadow: `0 0 ${p.size * 3}px ${color}, 0 0 ${p.size * 6}px ${color}40`,
+                            opacity: finalOpacity,
+                            x: xTransform,
+                            y: yTransform,
+                            scale: scale,
+                        }}
+                    />
+                );
+            })}
         </div>
     );
 }
@@ -246,7 +256,7 @@ NodeCard.displayName = "NodeCard";
 
 const BrainNode = forwardRef<
     HTMLDivElement,
-    { className?: string; isMobile: boolean; scrollP: number; beamDuration: number }
+    { className?: string; isMobile: boolean; scrollP: import("motion/react").MotionValue<number>; beamDuration: number }
 >(({ className, isMobile, scrollP, beamDuration }, ref) => {
     return (
         <div className={cn("relative group", className)}>
@@ -312,11 +322,7 @@ export default function HistorySection() {
     const beam4P = useTransform(scrollYProgress, [0.38, 0.66], [0, 1], { clamp: true });
     const beam5P = useTransform(scrollYProgress, [0.48, 0.78], [0, 1], { clamp: true });
 
-    const [scrollP, setScrollP] = useState(0);
-    useEffect(() => {
-        const unsub = scrollYProgress.on("change", setScrollP);
-        return unsub;
-    }, [scrollYProgress]);
+    // Removed scrollP state to prevent React re-renders on every scroll frame
 
     const beamDuration = 7;
 
@@ -381,7 +387,7 @@ export default function HistorySection() {
                     </div>
 
                     <div className="flex items-center justify-center md:col-start-2 md:row-start-1 md:row-span-2">
-                        <BrainNode ref={brainRef} isMobile={isMobile} scrollP={scrollP} beamDuration={beamDuration} />
+                        <BrainNode ref={brainRef} isMobile={isMobile} scrollP={scrollYProgress} beamDuration={beamDuration} />
                     </div>
 
                     <div className="w-full max-w-[280px] md:max-w-[300px] md:col-start-3 md:row-start-1 md:justify-self-start">
