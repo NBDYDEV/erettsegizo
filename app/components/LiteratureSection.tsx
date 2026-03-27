@@ -82,7 +82,6 @@ export default function LiteratureSection() {
                 </div>
             </div>
 
-            {/* Grid Section - Itt váltottunk a scrollról gridre */}
             <div className="container-main px-4 sm:px-6 lg:px-8 max-w-[1200px] mx-auto pb-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                     {STEPS.map((step, i) => (
@@ -91,7 +90,6 @@ export default function LiteratureSection() {
                 </div>
             </div>
 
-            {/* Bottom closing section */}
             <div className="w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-16 container-main px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto pb-16 md:pb-24 lg:pb-32 pt-16">
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start">
                     <div
