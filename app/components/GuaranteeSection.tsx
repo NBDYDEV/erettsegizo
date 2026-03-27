@@ -21,6 +21,9 @@ function PriceUrgencyBlock() {
                 <Clock className="w-4 h-4 shrink-0" strokeWidth={3} /> {tier.label} {tier.deadline}-ig: {formatPrice(tier.price)}
             </p>
             <NavCountdown dark />
+            <button className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shadow-lg">
+                Jelentkezem {formatPrice(tier.price)}-ért
+            </button>
         </div>
     );
 }
@@ -49,8 +52,6 @@ export default function GuaranteeSection() {
                     Nincs kérdés.<br />
                     Nincs magyarázkodás.
                 </p>
-
-                {/* Pricing Urgency in Guarantee Section */}
                 <PriceUrgencyBlock />
 
                 <h2 className="font-poppins-extrab text-4xl sm:text-5xl md:text-6xl text-black mb-6 mt-16 tracking-tight leading-tight px-2">
@@ -59,8 +60,8 @@ export default function GuaranteeSection() {
 
             </div>
 
-            {/* Ki tartja? Section using about-1 */}
-            <div className="w-full">
+            <div className="w-full max-w-7xl mx-auto mt-12">
+                {/* A displayProgressIndicators bekapcsolása segíti a navigációt mobilon */}
                 <About1 />
             </div>
         </section>

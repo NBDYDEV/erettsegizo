@@ -46,38 +46,36 @@ function CountdownBlock({ value, label }: { value: number; label: string }) {
 
 function NavCountdown({ dark }: { dark?: boolean }) {
     const { days, hours, minutes, seconds } = useNextSundayCountdown();
-
     const wrapperClasses = dark
-        ? "border-amber-500/30 bg-amber-500/10 text-amber-600"
-        : "border-amber-400/40 bg-white/10 text-white";
+        ? "border-black/10 bg-black/5 text-black"
+        : "border-[#CEFF06]/30 bg-[#CEFF06]/5 text-[#CEFF06]";
 
     return (
         <div className={`relative group cursor-default`}>
-            {/* Subtle animated glow behind */}
-            <div className={`absolute -inset-[1px] rounded-2xl opacity-60 blur-sm transition-opacity group-hover:opacity-100 ${dark ? "bg-gradient-to-r from-amber-400/30 via-orange-400/30 to-amber-400/30" : "bg-gradient-to-r from-amber-300/20 via-orange-300/20 to-amber-300/20"} animate-pulse`} />
+            <div className={`absolute -inset-[1px] rounded-2xl opacity-40 blur-md transition-opacity group-hover:opacity-100 
+                ${dark ? "bg-black/20" : "bg-[#CEFF06]/40"} animate-pulse`}
+            />
 
-            <div className={`relative flex items-center gap-2 md:gap-3 lg:gap-4 px-3 md:px-5 py-1.5 md:py-2 rounded-2xl border backdrop-blur-sm ${wrapperClasses}`}>
-                {/* Label — hidden on mobile */}
+            <div className={`relative flex items-center gap-2 md:gap-3 lg:gap-4 px-3 md:px-5 py-1.5 md:py-2 rounded-2xl border backdrop-blur-sm transition-colors duration-300 ${wrapperClasses}`}>
                 <div className="hidden md:flex flex-col items-start mr-1">
-                    <span className="text-[11px] uppercase tracking-[0.15em] font-poppins-extrab leading-tight whitespace-nowrap">
+                    <span className="text-[10px] uppercase tracking-[0.12em] font-bold leading-tight">
                         Jelentkezési
                     </span>
-                    <span className="text-[11px] uppercase tracking-[0.15em] font-poppins-extrab leading-tight whitespace-nowrap">
+                    <span className="text-[10px] uppercase tracking-[0.12em] font-bold leading-tight">
                         határidő
                     </span>
                 </div>
 
-                {/* Thin separator — hidden on mobile */}
-                <div className={`hidden md:block w-px h-8 ${dark ? "bg-amber-500/30" : "bg-white/30"}`} />
+                {/* Elválasztó vonal */}
+                <div className={`hidden md:block w-px h-7 ${dark ? "bg-black/20" : "bg-[#CEFF06]/30"}`} />
 
-                {/* Countdown digits */}
                 <div className="flex items-center gap-1.5 md:gap-2.5 lg:gap-3">
                     <CountdownBlock value={days} label="nap" />
-                    <span className="text-[12px] md:text-[16px] font-light opacity-40 -mt-2">:</span>
+                    <span className="opacity-40 -mt-4">:</span>
                     <CountdownBlock value={hours} label="óra" />
-                    <span className="text-[12px] md:text-[16px] font-light opacity-40 -mt-2">:</span>
+                    <span className="opacity-40 -mt-4">:</span>
                     <CountdownBlock value={minutes} label="perc" />
-                    <span className="text-[12px] md:text-[16px] font-light opacity-40 -mt-2">:</span>
+                    <span className="opacity-40 -mt-4">:</span>
                     <CountdownBlock value={seconds} label="mp" />
                 </div>
             </div>

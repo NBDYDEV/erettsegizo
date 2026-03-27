@@ -29,7 +29,7 @@ export default function PricingSection() {
                         <div className="flex flex-col gap-3">
                             <div className="flex items-start gap-3">
                                 <Minus className="w-5 h-5 text-black mt-1 shrink-0" strokeWidth={4} />
-                                <p className="font-poppins-med text-black text-[1.05rem] md:text-[1.25rem] leading-snug">egyetlen magánóra ára egy népszerű tanárnál,</p>
+                                <p className="font-poppins-med text-black text-[1.05rem] md:text-[1.25rem] leading-snug">egyetlen magánóra ára egy népszerű tanárnál</p>
                             </div>
                             <div className="flex items-start gap-3">
                                 <Minus className="w-5 h-5 text-black mt-1 shrink-0" strokeWidth={4} />
@@ -41,7 +41,7 @@ export default function PricingSection() {
                             <div className="bg-[#111] rounded-2xl p-4 sm:px-6 sm:py-4 inline-block shadow-xl border border-white/10 ring-1 ring-black/5">
                                 <p className="font-poppins-med text-white/90 text-[0.95rem] sm:text-[1.15rem] leading-[1.6] sm:leading-snug">
                                     <span className="font-poppins-bold text-white uppercase tracking-wider text-xs block mb-1 opacity-60">Vagy ami a legfontosabb:</span>
-                                    <span className="font-poppins-bold text-white text-[1.1rem] sm:text-[1.3rem]">töredéke egy fizetős félévnek,</span><br className="hidden lg:block" /> amiről pár elbukott pont miatt csúsztál le
+                                    <span className="font-poppins-bold text-white text-[1.1rem] sm:text-[1.3rem]">töredéke annak, </span><br className="hidden lg:block" /> mint ha pár pont elvesztése miatt fizetős szakra kerülnél
                                 </p>
                             </div>
                         </div>
