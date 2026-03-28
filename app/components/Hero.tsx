@@ -150,46 +150,21 @@ export default function Hero() {
 
                 </div>
             </section>
-            <div className="relative z-20 flex justify-center w-full mt-[-130px] sm:mt-[-170px] md:mt-[-190px] lg:mt-[-350px] xl:mt-[-400px] pointer-events-none px-4">
-                <div className="h-[560px] sm:h-[610px] md:h-[640px] lg:h-[700px] xl:h-[720px] flex justify-center pointer-events-auto">
-                    <div className="origin-top scale-[0.48] sm:scale-[0.52] md:scale-[0.55] lg:scale-[0.6] xl:scale-[0.62] rounded-[6rem] relative">
-                        {/* <Device
-                            isScrollable={true}
-                            scale={1}
-                            enableParallax={false}
-                            enableRotate={false}
-                        >
-                            <div className="flex flex-col gap-5 px-6 bg-[#F5F5F7] min-h-full pb-[20px] pt-[80px] relative">
-                                {appleContentItems.map((item, i) => (
-                                    <div key={i} className="bg-white rounded-[2.5rem] overflow-hidden border border-black/5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-transform hover:scale-[1.02] cursor-pointer">
-                                        <div className="w-full text-center pt-7 pb-4">
-                                            <span className="text-[11px] font-poppins-bold tracking-[0.18em] uppercase text-black/30">{item.label}</span>
-                                        </div>
-                                        <div className="flex items-center gap-7 px-8 pb-8">
-                                            <div className={`w-[5.5rem] h-[5.5rem] rounded-[1.6rem] flex-shrink-0 flex items-center justify-center bg-gradient-to-br ${item.color} shadow-md`}>
-                                                <item.Icon className="w-9 h-9 text-white" strokeWidth={1.8} />
-                                            </div>
-                                            <p className="font-poppins-bold text-[#1d1d1f] text-[1.25rem] leading-snug flex-1">
-                                                {item.title}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </Device> */}
+            <div className="relative z-20 flex justify-center w-full mt-[-180px] sm:mt-[-190px] md:mt-[-190px] lg:mt-[-350px] xl:mt-[-400px] pointer-events-none px-4">
+                <div className="h-[660px] sm:h-[670px] md:h-[690px] lg:h-[740px] xl:h-[760px] flex justify-center pointer-events-auto overflow-visible">
+                    <div className="origin-top scale-[0.56] sm:scale-[0.56] md:scale-[0.55] lg:scale-[0.6] xl:scale-[0.62] rounded-[6rem] relative">
                         <Device
                             isScrollable={false}
                             scale={1}
                             enableParallax={false}
                             enableRotate={false}
                         >
-                            {/* <TikTokFeed /> */}
                             <MessengerChat />
                         </Device>
                     </div>
                 </div>
             </div>
 
-        </div>
+        </div >
     );
 }
