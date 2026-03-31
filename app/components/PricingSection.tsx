@@ -66,13 +66,13 @@ export default function PricingSection() {
                     </div>
 
                     <div className="w-full max-w-2xl mb-6 flex flex-col items-center gap-2">
-                        <p className="flex items-center gap-1.5 text-xs font-poppins-bold uppercase tracking-[0.2em] text-green whitespace-nowrap">
-                            <Clock className="w-4 h-4 text-green shrink-0" strokeWidth={3.5} /> A {tier.label.toLowerCase()} ({formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}) {tier.deadlineLabel}-ig él
+                        <p className="flex items-center gap-2 text-sm font-poppins-bold uppercase tracking-[0.15em] text-red-500">
+                            <Clock className="w-4 h-4 shrink-0" strokeWidth={3} /> {tier.label} {tier.deadlineLabel}-ig: {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}
                         </p>
                         <NavCountdown dark large />
                     </div>
 
-                    <Link 
+                    <Link
                         href="/jelentkezes"
                         className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg cursor-pointer"
                     >

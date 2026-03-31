@@ -71,13 +71,12 @@ export default function LiteratureSection() {
             {/* Heading */}
             <div className="pt-16 md:pt-24 lg:pt-32 pb-12 md:pb-20 container-main px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
                 <div className="w-full text-center">
-                    <h2 className="text-4xl sm:text-[2.5rem] md:text-6xl lg:text-[4.75rem] text-black leading-[1.1] tracking-tight">
-                        <span className="block font-poppins-med text-2xl md:text-3xl lg:text-4xl text-black/60 mb-2">Középszintű</span>
-                        <span className="font-poppins-extrab">Magyar nyelv és irodalom</span>
+                    <h2 className="font-poppins-extrab text-3xl md:text-4xl lg:text-5xl leading-tight text-black">
+                        Középszintű Magyar nyelv és irodalom
                         <br />
-                        <span className="font-poppins-med text-2xl sm:text-3xl md:text-5xl lg:text-[3.5rem] text-black/70 tracking-normal">
+                        <span className="font-poppins-med text-2xl md:text-3xl lg:text-4xl text-black/70">
                             korszakok és{" "}
-                            <span className="italic font-light text-black/50">művek rendszerben</span>
+                            <span className="italic font-poppins-bold text-black/50">művek rendszerben</span>
                         </span>
                     </h2>
                 </div>
