@@ -16,29 +16,29 @@ export default function FAQ2() {
 
     const faqs = [
         {
-            question: "Lorem Ipsum?",
+            question: "Meddig tart az ismétlés?",
             answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "Az ismétlés 16:30-kor kezdődik és 21:00-ig tart. Ebben benne van az alapos áttekintés és a rövid szünetek is, hogy friss maradj.",
         },
         {
-            question: "Lorem Ipsum?",
+            question: "Mi történik, ha nem tudok végig ott lenni?",
             answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "Bár az élő részvétel a legjobb a kérdések miatt, minden jelentkező hozzáférést kap a felvételhez, így bármikor visszanézheted a neked fontos részeket.",
         },
         {
-            question: "Lorem Ipsum?",
+            question: "Milyen platformon lesz az oktatás?",
             answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "Egy zárt, könnyen kezelhető online felületen tartjuk, amihez csak egy böngészőre van szükséged. A linket e-mailben küldjük ki.",
         },
         {
-            question: "Lorem Ipsum?",
+            question: "Kapok valamilyen segédanyagot?",
             answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "Igen! Minden résztvevőnek küldünk egy strukturált vázlatot és kulcsfogalom-tárat, ami segít a rendszerezésben és a gyors áttekintésben.",
         },
         {
-            question: "Lorem Ipsum?",
+            question: "Mennyire kell előre készülnöm az estre?",
             answer:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "Nem szükséges külön készülnöd. Ez az este pont arról szól, hogy ha már tanultál, akkor segítünk mindent a helyére tenni a fejedben az érettségi előtt.",
         },
     ];
 

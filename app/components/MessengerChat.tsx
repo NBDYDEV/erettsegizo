@@ -61,48 +61,48 @@ const PEOPLE: Person[] = [
 const ME_IDX = -1;
 
 const SCRIPT: ChatEvent[] = [
-    { type: "message", personIdx: 0, text: "Srácok ti hogy álltok a töri érettségivel? 😅" },
+    { type: "message", personIdx: 0, text: "emberek, ti hogy álltok a törivel??!! 🥲" },
     { type: "pause", duration: 800 },
     { type: "typing", personIdx: 1, duration: 1200 },
-    { type: "message", personIdx: 1, text: "Ne is mondd, még az évszámokat se tudom 💀" },
+    { type: "message", personIdx: 1, text: "ne is mondd, semmit se tudok xd" },
     { type: "pause", duration: 400 },
     { type: "typing", personIdx: 2, duration: 900 },
-    { type: "message", personIdx: 2, text: "Én a világháborúkat keverem össze folyton" },
+    { type: "message", personIdx: 2, text: "én a világháborúkat keverem össze folyton😭" },
     { type: "pause", duration: 600 },
-    { type: "typing", personIdx: 3, duration: 1400 },
-    { type: "message", personIdx: 3, text: "Amúgy van 1 hét, elég lesz az? 🤔" },
+    { type: "typing", personIdx: 3, duration: 1000 },
+    { type: "message", personIdx: 3, text: "már csak pár nap van... elég lesz az?????? 💀" },
+    { type: "pause", duration: 600 },
+    { type: "message", personIdx: ME_IDX, text: "halljátok" },
     { type: "pause", duration: 500 },
-    { type: "reaction", reactionPersonIdx: 0, reaction: "😂" },
     { type: "typing", personIdx: ME_IDX, duration: 1000 },
-    { type: "message", personIdx: ME_IDX, text: "Én találtam egy elég jó oldalt ami rendszerezi az egész anyagot" },
+    { type: "message", personIdx: ME_IDX, text: "én találtam egy tök jó oldalt, ami rendszerezi az egész anyagot!!" },
     { type: "pause", duration: 300 },
     { type: "typing", personIdx: 1, duration: 600 },
-    { type: "message", personIdx: 1, text: "Komolyan?? Melyik az?" },
+    { type: "message", personIdx: 1, text: "komolyan??? melyik az?" },
     { type: "pause", duration: 400 },
     { type: "typing", personIdx: ME_IDX, duration: 800 },
     { type: "message", personIdx: ME_IDX, text: "erettsegizo.hu", link: true },
     { type: "pause", duration: 300 },
     { type: "typing", personIdx: ME_IDX, duration: 1400 },
-    { type: "message", personIdx: ME_IDX, text: "Elvileg az érettségi előtti este átmegy veled a teljes anyagon kronologikusan 🔥" },
+    { type: "message", personIdx: ME_IDX, text: "elvileg az érettségi előtti este átmegy veled az egész anyagon kronologikus sorrendben!!!" },
     { type: "pause", duration: 700 },
     { type: "reaction", reactionPersonIdx: 1, reaction: "🔥" },
-    { type: "reaction", reactionPersonIdx: 2, reaction: "👀" },
+    { type: "reaction", reactionPersonIdx: 2, reaction: "🔥" },
     { type: "typing", personIdx: 2, duration: 1100 },
-    { type: "message", personIdx: 2, text: "Jaa ez tök jó, pont ilyen kell" },
+    { type: "message", personIdx: 2, text: "AAA nekem pont ilyen kéne" },
     { type: "pause", duration: 500 },
     { type: "typing", personIdx: 3, duration: 900 },
-    { type: "message", personIdx: 3, text: "Beregisztráltam most 🙌" },
+    { type: "message", personIdx: 3, text: "oké én regisztráltam is🥳" },
     { type: "pause", duration: 400 },
     { type: "typing", personIdx: 0, duration: 800 },
-    { type: "message", personIdx: 0, text: "Király, én is megyek, köszi a tippet! 💪" },
+    { type: "message", personIdx: 0, text: "ez nagyon fullosnak tűnik, fix megyek én is!" },
     { type: "pause", duration: 600 },
     { type: "seen", duration: 0 },
     { type: "pause", duration: 1000 },
     { type: "typing", personIdx: 1, duration: 1200 },
-    { type: "message", personIdx: 1, text: "Na akkor holnap mindenki ott! 📚" },
+    { type: "message", personIdx: 1, text: "na akkor ott tala 😛" },
     { type: "pause", duration: 500 },
-    { type: "reaction", reactionPersonIdx: 0, reaction: "💪" },
-    { type: "reaction", reactionPersonIdx: 3, reaction: "❤️" },
+    { type: "reaction", reactionPersonIdx: 2, reaction: "❤️" },
 ];
 
 interface RenderedMsg {
@@ -183,14 +183,7 @@ export default function MessengerChat() {
 
     const processNext = useCallback(() => {
         if (scriptIdx.current >= SCRIPT.length) {
-            timeoutRef.current = setTimeout(() => {
-                scriptIdx.current = 0;
-                msgCounter.current = 0;
-                setMessages([]);
-                setTypingPerson(null);
-                setSeenBy([]);
-                timeoutRef.current = setTimeout(processNext, 800);
-            }, 3000);
+            setTypingPerson(null);
             return;
         }
 

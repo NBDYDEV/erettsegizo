@@ -35,60 +35,28 @@ const CARDS = [
 
 export default function WhyOnlineSection() {
     return (
-        <section className="w-full py-20 md:py-32 bg-white overflow-hidden relative">
-            <div className="container-main flex flex-col items-center px-4 sm:px-6 lg:px-8 relative z-10">
-
-                <div className="w-full max-w-5xl mb-12 sm:mb-16 md:mb-24 text-center md:text-left px-2">
-                    <h2 className="font-poppins-extrab text-[2.2rem] sm:text-4xl md:text-6xl text-black mb-6 tracking-tight leading-tight">
-                        Miért online az utolsó este?
-                    </h2>
-                </div>
-
-                <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                    {CARDS.map((card, i) => (
-                        <div
-                            key={i}
-                            className={`bg-[#f4f5f8] shadow-[inset_0_1px_0_rgba(255,255,255,1),_0_15px_30px_rgba(0,0,0,0.06)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,1),_0_25px_50px_rgba(0,0,0,0.1)] border border-neutral-200/50 rounded-[2rem] md:rounded-[3rem] hover:-translate-y-1 transition-all duration-300 overflow-hidden ${card.gridClass}`}
-                        >
-                            <div className={card.textClass}>
-                                <h3 className="font-poppins-bold text-3xl md:text-4xl text-black mb-4 leading-tight">
-                                    {card.title}
-                                </h3>
-                                <p className="font-poppins-med text-gray-500 text-lg md:text-xl leading-relaxed">
-                                    {card.desc}
-                                </p>
-                            </div>
-                            <div className={card.imgContainerClass}>
-                                <Image
-                                    src={card.img}
-                                    alt={card.title}
-                                    width={800}
-                                    height={600}
-                                    className={`shadow-md ${card.imgClass}`}
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                />
-                            </div>
+        <section className="w-full py-16 md:py-24 bg-white">
+            <div className="container-main px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+                    <div className="w-full md:w-1/2">
+                        <h2 className="font-poppins-extrab text-3xl md:text-4xl lg:text-5xl text-black leading-tight mb-8">
+                            Miért online az utolsó este?
+                        </h2>
+                        <p className="font-poppins-med text-lg md:text-xl text-black/70 leading-relaxed italic">
+                            "Az utolsót azért tartjuk csak online formában, mert így az utazásra nem kell időt szánnod, és amikor vége, feküdhetsz is le aludni a saját ágyadba."
+                        </p>
+                    </div>
+                    <div className="w-full md:w-1/2">
+                        <div className="relative h-[300px] md:h-[400px] w-full rounded-[2.5rem] overflow-hidden shadow-2xl">
+                            <Image
+                                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070"
+                                alt="Pihenés"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
-                    ))}
+                    </div>
                 </div>
-
-                <div className="w-full max-w-4xl mt-20 sm:mt-24 md:mt-36 text-center flex flex-col items-center px-2">
-                    <h3 className="font-poppins-med text-[1.35rem] sm:text-3xl md:text-4xl text-black mb-8 sm:mb-10 leading-snug">
-                        Menj be úgy az érettségire, hogy tudod <br className="block sm:hidden" /><span className="font-poppins-bold">mindenen végigmentél.</span>
-                    </h3>
-
-                    <p className="font-poppins-med text-lg sm:text-xl md:text-2xl text-black mb-10 sm:mb-14">
-                        Az utolsó este nem a kapkodásról kell szóljon.<br />
-                        <span className="font-poppins-bold text-[1.7rem] sm:text-3xl md:text-5xl mt-3 inline-block">
-                            Hanem a <span className="bg-green px-2 sm:px-3 rounded-lg shadow-sm">lezárásról.</span>
-                        </span>
-                    </p>
-
-                    <button className="bg-black text-white font-poppins-bold text-[15px] sm:text-lg md:text-xl px-8 sm:px-10 md:px-14 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex items-center justify-center shadow-2xl w-full sm:w-auto">
-                        Csatlakozom az utolsó esti ismétléshez
-                    </button>
-                </div>
-
             </div>
         </section>
     );

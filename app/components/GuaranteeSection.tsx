@@ -17,11 +17,11 @@ function PriceUrgencyBlock() {
     if (!tier) return null;
 
     return (
-        <div className="w-full max-w-2xl bg-white rounded-3xl p-8 border border-gray-100 shadow-xl flex flex-col items-center gap-4">
+        <div className="w-full max-w-2xl bg-white rounded-3xl p-8 flex flex-col items-center gap-4">
             <p className="flex items-center gap-2 text-sm font-poppins-bold uppercase tracking-[0.15em] text-red-500">
                 <Clock className="w-4 h-4 shrink-0" strokeWidth={3} /> {tier.label} {tier.deadlineLabel}-ig: {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}
             </p>
-            <NavCountdown dark />
+            <NavCountdown dark large />
             <button className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg">
                 <span>Jelentkezem {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}-ért</span>
                 {tier.isCombo && <span className="text-xs opacity-80 mt-1">(Töri + Magyar ismétlés)</span>}

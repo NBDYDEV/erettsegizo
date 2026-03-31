@@ -61,7 +61,7 @@ export function getCurrentPriceTier() {
   const now = (typeof window !== 'undefined' && window.localStorage.getItem('pricing_test_date'))
     ? new Date(window.localStorage.getItem('pricing_test_date')!)
     : new Date();
-    
+
   for (let i = PRICING_SCHEDULE.length - 1; i >= 0; i--) {
     if (now >= PRICING_SCHEDULE[i].date) {
       return PRICING_SCHEDULE[i];
@@ -76,5 +76,5 @@ export function getActiveSubjects() {
 }
 
 export function formatPrice(price: number) {
-  return new Intl.NumberFormat('hu-HU').format(price) + " Ft";
+  return new Intl.NumberFormat('hu-HU').format(price);
 }

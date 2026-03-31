@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { getCurrentPriceTier, getActiveSubjects } from "@/app/lib/pricing";
 
 function useDeadlineCountdown() {
@@ -36,53 +37,65 @@ function useDeadlineCountdown() {
     return state;
 }
 
-function CountdownBlock({ value, label }: { value: number; label: string }) {
+function CountdownBlock({ value, label, large }: { value: number; label: string; large?: boolean }) {
     return (
         <div className="flex flex-col items-center">
-            <span className="text-[14px] md:text-[18px] lg:text-[20px] font-poppins-extrab leading-none tabular-nums">
+            <span className={`font-poppins-extrab leading-none tabular-nums ${large ? "text-[20px] md:text-[28px] lg:text-[36px]" : "text-[14px] md:text-[18px] lg:text-[20px]"
+                }`}>
                 {String(value).padStart(2, "0")}
             </span>
-            <span className="text-[7px] md:text-[9px] lg:text-[10px] uppercase tracking-[0.15em] font-poppins opacity-70 mt-0.5">
+            <span className={`uppercase tracking-[0.15em] font-poppins opacity-70 mt-0.5 ${large ? "text-[10px] md:text-[12px] lg:text-[14px]" : "text-[7px] md:text-[9px] lg:text-[10px]"
+                }`}>
                 {label}
             </span>
         </div>
     );
 }
 
-function NavCountdown({ dark }: { dark?: boolean }) {
+function NavCountdown({ dark, large, monochrome }: { dark?: boolean; large?: boolean; monochrome?: boolean }) {
     const { days, hours, minutes, seconds, tierLabel, deadlineLabel } = useDeadlineCountdown();
-    const wrapperClasses = dark
-        ? "border-black/10 bg-black/5 text-black"
-        : "border-[#CEFF06]/30 bg-[#CEFF06]/5 text-[#CEFF06]";
+    
+    const glowColor = monochrome ? "bg-white/20" : (dark ? "bg-black/20" : "bg-[#CEFF06]/40");
+    const wrapperClasses = monochrome
+        ? "border-white/10 bg-white/5 text-white"
+        : (dark
+            ? "border-black/10 bg-black/5 text-black"
+            : "border-[#CEFF06]/30 bg-[#CEFF06]/5 text-[#CEFF06]");
 
     return (
         <div className={`relative group cursor-default`}>
-            <div className={`absolute -inset-[1px] rounded-2xl opacity-40 blur-md transition-opacity group-hover:opacity-100 
-                ${dark ? "bg-black/20" : "bg-[#CEFF06]/40"} animate-pulse`}
+            <div className={`absolute -inset-[1px] rounded-2xl opacity-40 blur-md transition-opacity 
+                ${glowColor} animate-pulse`}
             />
 
-            <div className={`relative flex flex-col md:flex-row items-center gap-1.5 md:gap-3 lg:gap-4 px-3 md:px-5 py-1.5 md:py-2 rounded-2xl border backdrop-blur-sm transition-colors duration-300 ${wrapperClasses}`}>
-                <span className="block md:hidden text-[7px] uppercase tracking-[0.15em] font-bold leading-none opacity-80">
+            <div className={`relative flex flex-col md:flex-row items-center transition-colors duration-300 rounded-2xl border backdrop-blur-sm ${wrapperClasses} ${large ? "gap-3 md:gap-6 lg:gap-8 px-6 md:px-10 py-3 md:py-4" : "gap-1.5 md:gap-3 lg:gap-4 px-3 md:px-5 py-1.5 md:py-2"
+                }`}>
+                <span className={`block md:hidden uppercase tracking-[0.15em] font-bold leading-none opacity-80 ${large ? "text-[10px] md:text-[12px]" : "text-[7px]"
+                    }`}>
                     {tierLabel ? `${tierLabel} — ${deadlineLabel}-ig` : "Jelentkezési határidő"}
                 </span>
                 <div className="hidden md:flex flex-col items-start mr-1">
-                    <span className="text-[9px] uppercase tracking-[0.12em] font-bold leading-tight opacity-70">
+                    <span className={`uppercase tracking-[0.12em] font-bold leading-tight opacity-70 ${large ? "text-[14px]" : "text-[9px]"
+                        }`}>
                         {tierLabel || "Jelentkezési határidő"}
                     </span>
-                    <span className="text-[10px] uppercase tracking-[0.12em] font-bold leading-tight">
+                    <span className={`uppercase tracking-[0.12em] font-bold leading-tight ${large ? "text-[16px]" : "text-[10px]"
+                        }`}>
                         {deadlineLabel ? `${deadlineLabel}-ig` : "határidő"}
                     </span>
                 </div>
-                <div className={`hidden md:block w-px h-7 ${dark ? "bg-black/20" : "bg-[#CEFF06]/30"}`} />
+                <div className={`hidden md:block w-px ${dark ? "bg-black/20" : "bg-[#CEFF06]/30"} ${large ? "h-14" : "h-7"
+                    }`} />
 
-                <div className="flex items-center gap-1.5 md:gap-2.5 lg:gap-3">
-                    <CountdownBlock value={days} label="nap" />
-                    <span className="opacity-40 -mt-4">:</span>
-                    <CountdownBlock value={hours} label="óra" />
-                    <span className="opacity-40 -mt-4">:</span>
-                    <CountdownBlock value={minutes} label="perc" />
-                    <span className="opacity-40 -mt-4">:</span>
-                    <CountdownBlock value={seconds} label="mp" />
+                <div className={`flex items-center ${large ? "gap-3 md:gap-5 lg:gap-6" : "gap-1.5 md:gap-2.5 lg:gap-3"
+                    }`}>
+                    <CountdownBlock value={days} label="nap" large={large} />
+                    <span className={`opacity-40 font-poppins-bold ${large ? "-mt-6 text-xl md:text-2xl" : "-mt-4"}`}>:</span>
+                    <CountdownBlock value={hours} label="óra" large={large} />
+                    <span className={`opacity-40 font-poppins-bold ${large ? "-mt-6 text-xl md:text-2xl" : "-mt-4"}`}>:</span>
+                    <CountdownBlock value={minutes} label="perc" large={large} />
+                    <span className={`opacity-40 font-poppins-bold ${large ? "-mt-6 text-xl md:text-2xl" : "-mt-4"}`}>:</span>
+                    <CountdownBlock value={seconds} label="mp" large={large} />
                 </div>
             </div>
         </div>
@@ -96,6 +109,8 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [navVisible, setNavVisible] = useState(false);
     const [subjects, setSubjects] = useState<string[]>([]);
+    const pathname = usePathname();
+    const isHome = pathname === "/";
 
     useEffect(() => {
         setSubjects(getActiveSubjects());
@@ -117,13 +132,22 @@ export default function Navbar() {
         return () => { document.body.style.overflow = ""; };
     }, [isMenuOpen]);
 
-    const logoSrc = scrolled ? "/svg/erettsegizo-b.svg" : "/svg/erettsegizo-w.svg";
-    const linkColor = scrolled
+    const logoSrc = (scrolled && isHome) ? "/svg/erettsegizo-b.svg" : "/svg/erettsegizo-w.svg";
+    
+    // On subpages, we want a white logo on the grey background if not scrolled, or black if we decide to blur white.
+    // Actually, the user says "grey background" for subpages.
+    const effectiveLogoSrc = isHome 
+        ? (isMenuOpen ? "/svg/erettsegizo-w.svg" : logoSrc)
+        : "/svg/erettsegizo-w.svg";
+
+    const linkColor = (scrolled && isHome)
         ? "text-gray-700 hover:text-black"
         : "text-nav-button-text hover:text-white";
-    const hamburgerColor = scrolled
+
+    const hamburgerColor = (scrolled && isHome)
         ? "text-gray-800 hover:text-black"
         : "text-nav-button-text hover:text-white";
+
     const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
         const element = document.getElementById(id.replace("#", ""));
@@ -145,13 +169,18 @@ export default function Navbar() {
     return (
         <>
             <nav className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 md:px-12 lg:px-24 font-poppins z-50 transition-all duration-300
-                ${isMenuOpen ? "bg-primary py-5 shadow-none" : scrolled ? "bg-white/80 backdrop-blur-md py-3 shadow-lg" : "bg-transparent py-5"}
+                ${isMenuOpen 
+                    ? "bg-[#1a1a1a] py-5 shadow-none" 
+                    : (scrolled && isHome) 
+                        ? "bg-white/80 backdrop-blur-md py-3 shadow-lg" 
+                        : (isHome ? "bg-transparent py-5" : "bg-[#1a1a1a] py-5 shadow-lg")
+                }
                 ${navVisible || isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}
             `}>
                 <div className="flex-shrink-0 z-50">
                     <Link href="/" onClick={() => setIsMenuOpen(false)}>
                         <Image
-                            src={isMenuOpen ? "/svg/erettsegizo-w.svg" : logoSrc}
+                            src={effectiveLogoSrc}
                             alt="Érettségiző.hu logo"
                             width={100}
                             height={40}
@@ -161,9 +190,19 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex flex-1 justify-center z-50">
-                    <NavCountdown dark={scrolled && !isMenuOpen} />
+                    <NavCountdown 
+                        dark={scrolled && isHome && !isMenuOpen} 
+                        monochrome={!isHome && !isMenuOpen}
+                    />
                 </div>
                 <div className="hidden md:flex items-center gap-8 lg:gap-14 flex-shrink-0">
+                    <Link
+                        href="/"
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`${linkColor} transition-colors duration-200 cursor-pointer`}
+                    >
+                        Kezdőlap
+                    </Link>
                     <a
                         href="#tortenelem"
                         onClick={(e) => scrollToSection(e, "tortenelem")}
@@ -216,7 +255,14 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            <div className={`fixed inset-0 bg-primary z-40 flex flex-col items-center justify-center pb-20 gap-8 transition-transform duration-300 ease-in-out md:hidden ${isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}>
+            <div className={`fixed inset-0 ${isHome ? "bg-primary" : "bg-[#1a1a1a]"} z-40 flex flex-col items-center justify-center pb-20 gap-8 transition-transform duration-300 ease-in-out md:hidden ${isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}>
+                <Link
+                    href="/"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-2xl text-nav-button-text hover:text-white transition-colors duration-200 cursor-pointer"
+                >
+                    Kezdőlap
+                </Link>
                 <a
                     href="#tortenelem"
                     onClick={(e) => scrollToSection(e, "tortenelem")}

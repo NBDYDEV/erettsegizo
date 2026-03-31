@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { getActiveSubjects } from '@/app/lib/pricing';
 import TikTokFeed from './TikTokFeed';
 import MessengerChat from './MessengerChat';
+import Link from 'next/link';
 
 const appleContentItems = [
     {
@@ -72,7 +73,7 @@ export default function Hero() {
                                 <div className="mb-4 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 inline-flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-green animate-pulse" />
                                     <span className="text-white font-poppins-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">
-                                        Aktuális tantárgy: {subjects.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(" & ")}
+                                        Aktuális tantárgy: {subjects.map(s => "Középszintű " + (s.charAt(0).toUpperCase() + s.slice(1))).join(" & ")}
                                     </span>
                                 </div>
                             )}
@@ -110,30 +111,33 @@ export default function Hero() {
                             <span className="font-poppins-bold text-white/90">Az érettségi előtti este, Online formában, 16:30 és 21:00 között</span> végigmegyünk a teljes anyagon, hogy másnapra minden a helyén legyen a fejedben.
                         </p>
 
-                        <button className="bg-green text-black font-poppins-bold text-sm md:text-base px-8 py-5 rounded-full w-full sm:w-fit hover:scale-105 transition-transform flex items-center justify-center">
+                        <Link 
+                            href="/jelentkezes"
+                            className="bg-green text-black font-poppins-bold text-sm md:text-base px-8 py-5 rounded-full w-full sm:w-fit hover:scale-105 transition-transform flex items-center justify-center cursor-pointer"
+                        >
                             Ott a helyem az utolsó esti ismétlésen
-                        </button>
+                        </Link>
 
                         <div className="flex items-center justify-center lg:justify-start gap-4 mt-2 lg:mt-6 w-full">
                             <div className="flex -space-x-3">
                                 <Image
                                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-primary object-cover"
-                                    src="https://i.pravatar.cc/100?img=1"
-                                    alt="Avatar"
+                                    src="/student_face_1_1774954416452.png"
+                                    alt="Tanuló 1"
                                     width={48}
                                     height={48}
                                 />
                                 <Image
                                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-primary object-cover"
-                                    src="https://i.pravatar.cc/100?img=2"
-                                    alt="Avatar"
+                                    src="/student_face_2_1774954447839.png"
+                                    alt="Tanuló 2"
                                     width={48}
                                     height={48}
                                 />
                                 <Image
                                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-primary object-cover"
-                                    src="https://i.pravatar.cc/100?img=3"
-                                    alt="Avatar"
+                                    src="/student_face_3_1774954537742.png"
+                                    alt="Tanuló 3"
                                     width={48}
                                     height={48}
                                 />

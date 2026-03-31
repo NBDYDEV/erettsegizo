@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import { Check, Clock, Minus, X } from 'lucide-react';
 import { NavCountdown } from './Navbar';
 import { getCurrentPriceTier, formatPrice } from '@/app/lib/pricing';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function PricingSection() {
     const [tier, setTier] = useState<any>(null);
@@ -65,16 +66,19 @@ export default function PricingSection() {
                     </div>
 
                     <div className="w-full max-w-2xl mb-6 flex flex-col items-center gap-2">
-                        <p className="flex items-center gap-1.5 text-xs font-poppins-bold uppercase tracking-[0.2em] text-red-500/80 whitespace-nowrap">
-                            <Clock className="w-4 h-4 text-red-500/80 shrink-0" strokeWidth={3.5} /> A {tier.label.toLowerCase()} ({formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}) {tier.deadlineLabel}-ig él
+                        <p className="flex items-center gap-1.5 text-xs font-poppins-bold uppercase tracking-[0.2em] text-green whitespace-nowrap">
+                            <Clock className="w-4 h-4 text-green shrink-0" strokeWidth={3.5} /> A {tier.label.toLowerCase()} ({formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}) {tier.deadlineLabel}-ig él
                         </p>
-                        <NavCountdown dark />
+                        <NavCountdown dark large />
                     </div>
 
-                    <button className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg">
+                    <Link 
+                        href="/jelentkezes"
+                        className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg cursor-pointer"
+                    >
                         <span>Jelentkezem {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}-ért</span>
                         {tier.isCombo && <span className="text-xs opacity-80 mt-1">(Töri + Magyar ismétlés)</span>}
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="w-full max-w-5xl mt-32 flex flex-col items-center">

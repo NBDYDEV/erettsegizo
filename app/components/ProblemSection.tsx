@@ -1,8 +1,17 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
 import { FileText, AlertCircle, Brain, ListCollapse, BookX, BookOpen } from 'lucide-react';
+
+const useCanHover = () => {
+    const [canHover, setCanHover] = useState(false);
+    useEffect(() => {
+        const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        setCanHover(!isTouch);
+    }, []);
+    return canHover;
+}
 
 const CARDS = [
     {
@@ -70,7 +79,7 @@ const ScatterWord = ({ text }: { text: string }) => {
     );
 };
 
-function ProblemCard({ card, index }: { card: typeof CARDS[0]; index: number }) {
+function ProblemCard({ card, index, canHover }: { card: typeof CARDS[0]; index: number; canHover: boolean }) {
     const Icon = card.icon;
 
     return (
@@ -79,22 +88,19 @@ function ProblemCard({ card, index }: { card: typeof CARDS[0]; index: number }) 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{
-                scale: 1.02,
-                y: -5,
-            }}
+            whileHover={canHover ? { scale: 1.02, y: -5 } : undefined}
             className="group relative p-8 sm:p-10 flex flex-col items-center text-center bg-white border border-gray-100 overflow-hidden transition-all duration-300"
         >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#AAFFA9] to-[#11FFBD] z-0" />
+            <div className={`absolute inset-0 transition-opacity duration-500 bg-gradient-to-br from-[#AAFFA9] to-[#11FFBD] z-0 ${canHover ? "opacity-0 group-hover:opacity-100" : "opacity-0"}`} />
 
             <div className="relative z-10 flex flex-col items-center">
-                <div className="mb-4 p-4 rounded-full bg-gray-50 group-hover:bg-white/50 transition-colors duration-300">
+                <div className={`mb-4 p-4 rounded-full bg-gray-50 transition-colors duration-300 ${canHover ? "group-hover:bg-white/50" : ""}`}>
                     <Icon
-                        className="w-8 h-8 text-black transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12"
+                        className={`w-8 h-8 text-black transition-transform duration-500 ${canHover ? "group-hover:scale-110 group-hover:rotate-12" : ""}`}
                         strokeWidth={1.5}
                     />
                 </div>
-                <p className="text-gray-600 group-hover:text-black transition-colors duration-300 text-[15px] md:text-base font-poppins-med leading-relaxed">
+                <p className={`text-gray-600 transition-colors duration-300 text-[15px] md:text-base font-poppins-med leading-relaxed ${canHover ? "group-hover:text-black" : ""}`}>
                     {card.text}
                 </p>
             </div>
@@ -103,6 +109,8 @@ function ProblemCard({ card, index }: { card: typeof CARDS[0]; index: number }) 
 }
 
 export default function ProblemSection() {
+    const canHover = useCanHover();
+
     return (
         <section className="w-full bg-[#f8f9fa] pb-24 md:pb-32">
             <div className="container-main flex flex-col items-center px-4 sm:px-6 lg:px-8 pt-24 md:pt-32">
@@ -115,7 +123,7 @@ export default function ProblemSection() {
             <div className="container-main px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-200">
                     {CARDS.map((card, i) => (
-                        <ProblemCard key={i} card={card} index={i} />
+                        <ProblemCard key={i} card={card} index={i} canHover={canHover} />
                     ))}
                 </div>
             </div>

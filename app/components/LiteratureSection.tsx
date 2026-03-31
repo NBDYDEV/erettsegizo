@@ -7,31 +7,31 @@ import Image from 'next/image';
 const STEPS = [
     {
         number: "01",
-        title: "Korszakról korszakra haladunk.",
-        desc: "A kronologikus felépítés segít, hogy a fejed képes legyen összefüggő képet alkotni – ne csak szigetelten emlékezz nevekre és dátumokra.",
-        image: "/images/Literature-1.png",
-        label: "Korszakok",
+        title: "Szövegértési feladatok és nyelvi teszt",
+        desc: "Az érettségi első fele a pontos szövegértésen múlik. Megnézzük a típuskérdéseket és a leggyakoribb hibalehetőségeket.",
+        image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2073",
+        label: "Szövegértés",
     },
     {
         number: "02",
-        title: "Megmutatjuk az ok–okozati láncokat.",
-        desc: 'Nem csak "mi van", hanem "miért és hogyan". Az összekapcsolt tudás messze felülmúlja az elszigetelt tények memorizálását.',
-        image: "/images/Literature-2.png",
-        label: "ok–okozat",
+        title: "Irodalmi műveltségi teszt",
+        desc: "Rendszerezzük a legfontosabb irodalmi fogalmakat, korstílusokat és életműveket, amikre szükséged lesz a tesztkitöltésnél.",
+        image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070",
+        label: "Műveltség",
     },
     {
         number: "03",
-        title: "Rögzítjük a lényeget minden témánál.",
-        desc: "Egy este nem elég az egész tananyagra – de elég arra, hogy a fontos dolgok biztonságosan a helyükre kerüljenek.",
-        image: "/images/Literature-3.png",
-        label: "Lényegek",
+        title: "Műelemzés (Novella vagy Vers)",
+        desc: "Elsajátítjuk az elemzés logikáját: hogyan építs fel egy profi esszét strukturáltan, irodalmi kifejezésekkel gazdagítva.",
+        image: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?q=80&w=2070",
+        label: "Elemzés",
     },
     {
         number: "04",
-        title: "Kimondjuk a kulcsfogalmakat és összefüggéseket.",
-        desc: "Ars poetica, motívum, korszakjegy – ha hallod a szót az érettségin, tudod pontosan, mit jelent és hova kapcsolódik.",
-        image: "/images/Literature-4.png",
-        label: "Összefüggések",
+        title: "Összehasonlító elemzés",
+        desc: "A két mű közötti kapcsolódási pontok megtalálása nem varázslat. Megtanuljuk a kötelező szempontokat és az érvelési technikákat.",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022",
+        label: "Összevetés",
     },
 ];
 
@@ -72,6 +72,7 @@ export default function LiteratureSection() {
             <div className="pt-16 md:pt-24 lg:pt-32 pb-12 md:pb-20 container-main px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
                 <div className="w-full text-center">
                     <h2 className="text-4xl sm:text-[2.5rem] md:text-6xl lg:text-[4.75rem] text-black leading-[1.1] tracking-tight">
+                        <span className="block font-poppins-med text-2xl md:text-3xl lg:text-4xl text-black/60 mb-2">Középszintű</span>
                         <span className="font-poppins-extrab">Magyar nyelv és irodalom</span>
                         <br />
                         <span className="font-poppins-med text-2xl sm:text-3xl md:text-5xl lg:text-[3.5rem] text-black/70 tracking-normal">

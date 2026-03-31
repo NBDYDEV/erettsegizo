@@ -363,7 +363,7 @@ export default function HistorySection() {
 
             <div className="mx-auto mb-12 md:mb-20 max-w-3xl text-center">
                 <h2 className="font-poppins-extrab text-3xl md:text-4xl lg:text-5xl leading-tight text-black">
-                    Történelem
+                    Középszintű Történelem
                     <br />
                     <span className="font-poppins-med text-2xl md:text-3xl lg:text-4xl text-black/70">
                         az ókortól napjainkig,{" "}
