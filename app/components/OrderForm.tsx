@@ -20,9 +20,9 @@ import {
     X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { getCurrentPriceTier, formatPrice } from "@/app/lib/pricing";
 
-/* ─── animated checkbox ─── */
 function AnimatedCheckbox({
     checked,
     onChange,
@@ -864,7 +864,7 @@ export default function OrderForm() {
                                                 checked={formData.aszf_gdpr}
                                                 onChange={handleChange}
                                             >
-                                                Elfogadom az <span className="text-white hover:text-green transition-colors cursor-pointer border-b border-white/20 hover:border-green/50 pb-0.5">Általános Szerződési Feltételeket</span>
+                                                Elfogadom az <Link href="/aszf" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-white hover:text-green transition-colors cursor-pointer border-b border-white/20 hover:border-green/50 pb-0.5">Általános Szerződési Feltételeket</Link>
                                             </AnimatedCheckbox>
 
                                             <AnimatedCheckbox
@@ -873,7 +873,7 @@ export default function OrderForm() {
                                                 checked={formData.adatvedelmi_gdpr}
                                                 onChange={handleChange}
                                             >
-                                                Az <span className="text-white hover:text-green transition-colors cursor-pointer border-b border-white/20 hover:border-green/50 pb-0.5">Adatkezelési Tájékoztatót</span> megismertem
+                                                Az <Link href="/adatvedelem" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-white hover:text-green transition-colors cursor-pointer border-b border-white/20 hover:border-green/50 pb-0.5">Adatkezelési Tájékoztatóban</Link> foglaltakat elolvastam, megértettem és tudomásul vettem.
                                             </AnimatedCheckbox>
 
                                             <AnimatedCheckbox
@@ -881,7 +881,7 @@ export default function OrderForm() {
                                                 checked={formData.even_aluli_18}
                                                 onChange={handleChange}
                                             >
-                                                18 év alatti vagyok (szülői beleegyezéssel)
+                                                A 18 éven aluli gyermek esetén törvényes képviselőjeként nyilatkozom, hogy az <Link href="/adatvedelem" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="text-white hover:text-green transition-colors cursor-pointer border-b border-white/20 hover:border-green/50 pb-0.5">Adatkezelési Tájékoztatóban</Link> foglaltakat elolvastam, megértettem és tudomásul vettem. Hozzájárulok gyermekem személyes adatainak kezeléséhez, a szolgáltatás igénybevétele érdekében.
                                             </AnimatedCheckbox>
                                         </div>
 

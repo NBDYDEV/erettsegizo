@@ -21,9 +21,9 @@ export default function FAQ2() {
                 "Az ismétlés 16:30-kor kezdődik és 21:00-ig tart. Ebben benne van az alapos áttekintés és a rövid szünetek is, hogy friss maradj.",
         },
         {
-            question: "Mi történik, ha nem tudok végig ott lenni?",
+            question: "Miben más ez, mint ha egyedül ismétlek?",
             answer:
-                "Bár az élő részvétel a legjobb a kérdések miatt, minden jelentkező hozzáférést kap a felvételhez, így bármikor visszanézheted a neked fontos részeket.",
+                "Itt nem csak átnézed az anyagot, hanem vezetetten, rendszerezve haladsz végig rajta, kiemelve azokat a pontokat, amik nagy eséllyel előjönnek az érettségin.",
         },
         {
             question: "Milyen platformon lesz az oktatás?",
@@ -31,9 +31,9 @@ export default function FAQ2() {
                 "Egy zárt, könnyen kezelhető online felületen tartjuk, amihez csak egy böngészőre van szükséged. A linket e-mailben küldjük ki.",
         },
         {
-            question: "Kapok valamilyen segédanyagot?",
+            question: "Megéri még az utolsó este csatlakozni?",
             answer:
-                "Igen! Minden résztvevőnek küldünk egy strukturált vázlatot és kulcsfogalom-tárat, ami segít a rendszerezésben és a gyors áttekintésben.",
+                "Igen — sokszor pont az utolsó átnézés adja meg azt a plusz magabiztosságot, ami az érettségin számít.",
         },
         {
             question: "Mennyire kell előre készülnöm az estre?",

@@ -111,7 +111,7 @@ export default function Hero() {
                             <span className="font-poppins-bold text-white/90">Az érettségi előtti este, Online formában, 16:30 és 21:00 között</span> végigmegyünk a teljes anyagon, hogy másnapra minden a helyén legyen a fejedben.
                         </p>
 
-                        <Link 
+                        <Link
                             href="/jelentkezes"
                             className="bg-green text-black font-poppins-bold text-sm md:text-base px-8 py-5 rounded-full w-full sm:w-fit hover:scale-105 transition-transform flex items-center justify-center cursor-pointer"
                         >
@@ -122,21 +122,21 @@ export default function Hero() {
                             <div className="flex -space-x-3">
                                 <Image
                                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-primary object-cover"
-                                    src="/student_face_1_1774954416452.png"
+                                    src="/images/student_1.png"
                                     alt="Tanuló 1"
                                     width={48}
                                     height={48}
                                 />
                                 <Image
                                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-primary object-cover"
-                                    src="/student_face_2_1774954447839.png"
+                                    src="/images/student_2.png"
                                     alt="Tanuló 2"
                                     width={48}
                                     height={48}
                                 />
                                 <Image
                                     className="w-10 h-10 md:w-12 md:h-12 rounded-full border-[3px] border-primary object-cover"
-                                    src="/student_face_3_1774954537742.png"
+                                    src="/images/student_3.png"
                                     alt="Tanuló 3"
                                     width={48}
                                     height={48}
