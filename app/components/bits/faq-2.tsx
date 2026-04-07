@@ -5,11 +5,15 @@ import { Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import { getCurrentPriceTier, formatPrice } from "@/app/lib/pricing";
+import { usePathname } from "next/navigation";
 
 export default function FAQ2() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [tier, setTier] = useState<any>(null);
+
+    const pathname = usePathname();
+    const isJelentkezes = pathname === "/jelentkezes";
 
     useEffect(() => {
         setTier(getCurrentPriceTier());
@@ -49,7 +53,23 @@ export default function FAQ2() {
 
     return (
         <section id="gyik" className="w-full flex items-start py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950 scroll-mt-20">
-            <div className="max-w-[1400px] mx-auto w-full">
+            <div className="max-w-[1400px] mx-auto w-full flex flex-col items-center">
+                {tier && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="mb-16 md:mb-24"
+                    >
+                        <Link
+                            href="/jelentkezes"
+                            className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg cursor-pointer"
+                        >
+                            <span>Jelentkezem {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}-ért</span>
+                        </Link>
+                    </motion.div>
+                )}
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16 xl:gap-20 justify-start">
                     <div className="flex flex-col space-y-6 lg:sticky lg:top-24 lg:self-start">
                         <motion.h2

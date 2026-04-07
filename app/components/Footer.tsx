@@ -4,10 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { getActiveSubjects } from "@/app/lib/pricing";
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
     const [subjects, setSubjects] = useState<string[]>([]);
     
+    const pathname = usePathname();
+    const isJelentkezes = pathname === "/jelentkezes";
+
     useEffect(() => {
         setSubjects(getActiveSubjects());
     }, []);
@@ -30,15 +34,17 @@ export default function Footer() {
                         </Link>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-[15px] font-poppins-med text-white/50">
-                        <Link href="/" className="hover:text-white transition-colors duration-300">Kezdőlap</Link>
-                        {subjects.includes("magyar") && (
-                            <Link href="#magyar" className="hover:text-white transition-colors duration-300">Magyar</Link>
-                        )}
-                        <Link href="#tortenelem" className="hover:text-white transition-colors duration-300">Történelem</Link>
-                        <Link href="#gyik" className="hover:text-white transition-colors duration-300">GYIK</Link>
-                        <Link href="/jelentkezes" className="hover:text-white transition-colors duration-300 text-green font-poppins-bold">Jelentkezés</Link>
-                    </div>
+                    {!isJelentkezes && (
+                        <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-[15px] font-poppins-med text-white/50">
+                            <Link href="/" className="hover:text-white transition-colors duration-300">Kezdőlap</Link>
+                            {subjects.includes("magyar") && (
+                                <Link href="#magyar" className="hover:text-white transition-colors duration-300">Magyar</Link>
+                            )}
+                            <Link href="#tortenelem" className="hover:text-white transition-colors duration-300">Történelem</Link>
+                            <Link href="#gyik" className="hover:text-white transition-colors duration-300">GYIK</Link>
+                            <Link href="/jelentkezes" className="hover:text-white transition-colors duration-300 text-green font-poppins-bold">Jelentkezés</Link>
+                        </div>
+                    )}
 
                     <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] font-poppins text-white/30 mt-4 md:mt-0">
                         <Link href="/aszf" className="hover:text-white transition-colors underline decoration-white/10">ÁSZF</Link>
