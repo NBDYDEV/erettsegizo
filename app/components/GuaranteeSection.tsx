@@ -24,7 +24,6 @@ function PriceUrgencyBlock() {
             <NavCountdown dark large />
             <button className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg">
                 <span>Jelentkezem {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}-ért</span>
-                {tier.isCombo && <span className="text-xs opacity-80 mt-1">(Töri + Magyar ismétlés)</span>}
             </button>
         </div>
     );

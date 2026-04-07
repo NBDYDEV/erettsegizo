@@ -51,6 +51,18 @@ export {
 // TikTok Events API (server-side)
 export { sendTikTokEvent } from './tiktok-events-api';
 
+// Google Analytics (GA4) - Browser-side
+export {
+  initGAPixel,
+  trackGAEvent,
+  trackGAPageView,
+  trackGALead,
+  trackGAPurchase,
+} from './google-analytics';
+
+// Google Analytics (GA4) - Server-side (Measurement Protocol)
+export { sendGAEvent } from './google-measurement-protocol';
+
 // SalesAutopilot Integration
 export {
   storeTrackingEventId,

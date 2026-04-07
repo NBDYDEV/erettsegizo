@@ -11,6 +11,7 @@ import { captureFbclid, captureTtclid } from '@/lib/tracking';
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '';
 const TIKTOK_PIXEL_ID = process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID || '';
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
 export default function TrackingScripts() {
   const { trackPageView } = useTracking();
@@ -21,7 +22,7 @@ export default function TrackingScripts() {
     captureTtclid();
 
     // Fire PageView after pixels have had time to initialize
-    // Small delay ensures fbq/ttq are ready
+    // Small delay ensures fbq/ttq/gtag are ready
     const timer = setTimeout(() => {
       trackPageView();
     }, 500);
@@ -31,6 +32,31 @@ export default function TrackingScripts() {
 
   return (
     <>
+      {/* ═══ Google Analytics (GA4) Base Code ═══ */}
+      {GA_MEASUREMENT_ID && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script
+            id="ga4-pixel"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}', {
+                  send_page_view: false,
+                  cookie_flags: 'SameSite=Lax;Secure'
+                });
+              `,
+            }}
+          />
+        </>
+      )}
+
       {/* ═══ Meta (Facebook) Pixel Base Code ═══ */}
       {META_PIXEL_ID && (
         <>
@@ -100,7 +126,8 @@ export default function TrackingScripts() {
           }}
         >
           🔍 Tracking: {META_PIXEL_ID ? '✓ Meta' : '✗ Meta'} |{' '}
-          {TIKTOK_PIXEL_ID ? '✓ TikTok' : '✗ TikTok'}
+          {TIKTOK_PIXEL_ID ? '✓ TikTok' : '✗ TikTok'} |{' '}
+          {GA_MEASUREMENT_ID ? '✓ GA4' : '✗ GA4'}
         </div>
       )}
     </>

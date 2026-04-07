@@ -65,20 +65,20 @@ export default function FAQ2() {
                             </span>
                         </motion.h2>
 
-                        <motion.div
+                        {/* <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
                             className="flex flex-col sm:flex-row items-stretch gap-3 sm:gap-4"
                         >
-                            <Link 
+                            <Link
                                 href="/jelentkezes"
                                 className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-[#ff3b30] text-white font-poppins-bold text-sm sm:text-base hover:bg-[#e7625b] hover:scale-105 transition-all duration-200 whitespace-nowrap text-center flex flex-col items-center justify-center"
                             >
                                 <span>Jelentkezem {tier ? formatPrice(tier.price) : "..."}-tól</span>
                                 {tier?.isCombo && <span className="text-[10px] opacity-80">(Töri, Magyar vagy Kombo)</span>}
                             </Link>
-                        </motion.div>
+                        </motion.div> */}
                     </div>
 
                     <div className="flex flex-col space-y-7">

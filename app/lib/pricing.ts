@@ -75,6 +75,10 @@ export function getActiveSubjects() {
   return tier.subjects;
 }
 
+export function isSubjectActive(subject: string) {
+  return getActiveSubjects().includes(subject);
+}
+
 export function formatPrice(price: number) {
-  return new Intl.NumberFormat('hu-HU').format(price);
+  return new Intl.NumberFormat('hu-HU').format(price) + " Ft";
 }

@@ -155,7 +155,7 @@ const IS_DEV = process.env.NODE_ENV === 'development';
  * Prefixed with [Tracking] for easy filtering in console.
  */
 export function trackingLog(
-  platform: 'Meta' | 'TikTok' | 'SAPI' | 'General',
+  platform: 'Meta' | 'TikTok' | 'GA4' | 'SAPI' | 'General',
   action: string,
   data?: unknown
 ): void {

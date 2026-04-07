@@ -2,9 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { getActiveSubjects } from "@/app/lib/pricing";
+import React, { useState, useEffect } from "react";
 
 export default function Footer() {
+    const [subjects, setSubjects] = useState<string[]>([]);
+    
+    useEffect(() => {
+        setSubjects(getActiveSubjects());
+    }, []);
+
     return (
         <footer className="w-full bg-[#050505] text-white py-12 sm:py-16 md:py-20 px-4 md:px-8 relative overflow-hidden snap-start">
 
@@ -25,7 +32,9 @@ export default function Footer() {
 
                     <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-[15px] font-poppins-med text-white/50">
                         <Link href="/" className="hover:text-white transition-colors duration-300">Kezdőlap</Link>
-                        <Link href="#magyar" className="hover:text-white transition-colors duration-300">Magyar</Link>
+                        {subjects.includes("magyar") && (
+                            <Link href="#magyar" className="hover:text-white transition-colors duration-300">Magyar</Link>
+                        )}
                         <Link href="#tortenelem" className="hover:text-white transition-colors duration-300">Történelem</Link>
                         <Link href="#gyik" className="hover:text-white transition-colors duration-300">GYIK</Link>
                         <Link href="/jelentkezes" className="hover:text-white transition-colors duration-300 text-green font-poppins-bold">Jelentkezés</Link>

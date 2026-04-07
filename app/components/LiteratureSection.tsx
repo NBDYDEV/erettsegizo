@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from "motion/react";
 import Image from 'next/image';
+import { getActiveSubjects } from '@/app/lib/pricing';
 
 const STEPS = [
     {
@@ -66,6 +67,14 @@ function StepCard({ step }: { step: typeof STEPS[0] }) {
 }
 
 export default function LiteratureSection() {
+    const [isActive, setIsActive] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsActive(getActiveSubjects().includes("magyar"));
+    }, []);
+
+    if (!isActive) return null;
+
     return (
         <section id="magyar" className="w-full bg-[#f8f9fa] scroll-mt-20">
             {/* Heading */}

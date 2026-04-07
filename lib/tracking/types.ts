@@ -48,6 +48,8 @@ export interface TrackingUserData {
   ttp?: string;
   /** TikTok ttclid value */
   ttclid?: string;
+  /** Google Analytics client_id (_ga cookie) */
+  gaClientId?: string;
 }
 
 /**
@@ -92,7 +94,7 @@ export interface TrackingEventPayload {
 export interface TrackingApiResponse {
   success: boolean;
   /** Platform name for debugging */
-  platform: 'meta' | 'tiktok';
+  platform: 'meta' | 'tiktok' | 'google';
   /** Event name that was sent */
   eventName: string;
   /** Event ID for cross-referencing */

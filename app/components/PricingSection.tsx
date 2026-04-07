@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Clock, Minus, X } from 'lucide-react';
+import { Check, Clock, Minus, X, History, BookOpen, Sparkles } from 'lucide-react';
 import { NavCountdown } from './Navbar';
 import { getCurrentPriceTier, formatPrice } from '@/app/lib/pricing';
 import { useState, useEffect } from 'react';
@@ -32,6 +32,44 @@ export default function PricingSection() {
                         )}
                     </h2>
 
+                    {/* Informational Cards Row */}
+                    <div className="flex flex-wrap items-center justify-center gap-4 mb-14 w-full max-w-4xl">
+                        {[
+                            { id: "töri", label: "Történelem", icon: History, active: true, price: tier.price },
+                            { id: "magyar", label: "Magyar", icon: BookOpen, active: tier.subjects.includes("magyar"), price: tier.price },
+                            { id: "kombo", label: "Kombo (Mindkettő)", icon: Sparkles, isCombo: true, active: tier.isCombo, price: tier.comboPrice },
+                        ]
+                        .filter(p => p.active)
+                        .map((prod) => (
+                            <div
+                                key={prod.id}
+                                className={`
+                                    relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-[1.5px] transition-all duration-300 text-center min-w-[200px] flex-1
+                                    ${prod.isCombo 
+                                        ? "border-green bg-green/[0.04] shadow-lg shadow-green/5" 
+                                        : "border-black/[0.06] bg-black/[0.01]"
+                                    }
+                                `}
+                            >
+                                <div className={`
+                                    w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300
+                                    ${prod.isCombo ? "bg-green text-black" : "bg-black/[0.04] text-black/30"}
+                                `}>
+                                    <prod.icon size={22} strokeWidth={2.5} />
+                                </div>
+                                <span className="font-poppins-bold text-black text-[15px]">{prod.label}</span>
+                                <span className="text-sm font-poppins-extrab mt-1 text-black">
+                                    {formatPrice(prod.price)}
+                                </span>
+                                {prod.isCombo && (
+                                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-black text-white text-[9px] font-poppins-bold px-3 py-1.5 rounded-lg uppercase tracking-wider whitespace-nowrap shadow-xl">
+                                        Legjobb érték
+                                    </span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
                     <div className="w-full text-left bg-transparent flex flex-col gap-4 max-w-3xl mb-12">
                         <p className="font-poppins-extrab text-black text-[1.15rem] md:text-[1.4rem] mb-1">Ez kevesebb, mint:</p>
 
@@ -58,7 +96,7 @@ export default function PricingSection() {
 
                     <div className="max-w-3xl mb-10 text-center">
                         <p className="font-poppins-med text-black text-sm md:text-base leading-relaxed">
-                            Cserébe kapsz egy teljes, vezetett áttekintést az egész anyagról pont az érettségi előtti estén
+                            Cserébe kapsz egy teljes, vezetett áttekintést az egész anyagról pont az érettségi előtti estén.
                         </p>
                         <p className="font-poppins-bold text-black text-sm md:text-base leading-relaxed">
                             Ha ettől csak 1-2 feladatnál érzed magad magabiztosabbnak, már megtérült.
@@ -77,7 +115,6 @@ export default function PricingSection() {
                         className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg cursor-pointer"
                     >
                         <span>Jelentkezem {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}-ért</span>
-                        {tier.isCombo && <span className="text-xs opacity-80 mt-1">(Töri + Magyar ismétlés)</span>}
                     </Link>
                 </div>
 

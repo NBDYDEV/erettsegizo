@@ -14,6 +14,9 @@ import {
   trackTikTokPageView,
   trackTikTokLead,
   trackTikTokPurchase,
+  trackGAPageView,
+  trackGALead,
+  trackGAPurchase,
   collectTrackingCookies,
   buildTrackingUserData,
   buildLeadCustomData,
@@ -21,6 +24,7 @@ import {
   storeTrackingEventId,
   storeLeadData,
   trackingLog,
+  getCookie,
 } from '@/lib/tracking';
 import type { TrackingUserData, TrackingCustomData } from '@/lib/tracking';
 
@@ -29,7 +33,7 @@ import type { TrackingUserData, TrackingCustomData } from '@/lib/tracking';
  * The route handler will enrich it with IP/UA and forward to the platform API.
  */
 async function sendServerEvent(
-  route: '/api/meta-event' | '/api/tiktok-event',
+  route: '/api/meta-event' | '/api/tiktok-event' | '/api/google-event',
   eventName: string,
   eventId: string,
   userData: TrackingUserData,
@@ -49,17 +53,24 @@ async function sendServerEvent(
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      console.error(`[useTracking] Server event failed (${route}):`, error);
+      let errorDetail = 'Unknown error';
+      try {
+        const errorJson = await response.json();
+        errorDetail = errorJson.error || JSON.stringify(errorJson);
+      } catch {
+        errorDetail = `HTTP ${response.status} ${response.statusText}`;
+      }
+      
+      console.error(`[useTracking] Server event failed (${route}) for ${eventName}:`, errorDetail);
     }
   } catch (error) {
     // Non-blocking — tracking errors should never break the user flow
-    console.error(`[useTracking] Server event error (${route}):`, error);
+    console.error(`[useTracking] Server event network/fetch error (${route}):`, error);
   }
 }
 
 /**
- * React hook for tracking events across Meta and TikTok platforms.
+ * React hook for tracking events across Meta, TikTok and Google Analytics.
  *
  * Usage:
  * ```tsx
@@ -77,7 +88,7 @@ export function useTracking() {
   const pageViewFired = useRef(false);
 
   /**
-   * Track a PageView event on both platforms.
+   * Track a PageView event on all platforms.
    * Fires browser pixel + server-side API for each platform.
    */
   const trackPageView = useCallback(() => {
@@ -86,12 +97,16 @@ export function useTracking() {
 
     const eventId = generateEventId();
     const cookies = collectTrackingCookies();
+    const gaCookie = getCookie('_ga');
+    // Extract client ID from _ga cookie (e.g. GA1.1.12345.67890 -> 12345.67890)
+    const gaClientId = gaCookie ? gaCookie.split('.').slice(-2).join('.') : undefined;
 
     trackingLog('General', `PageView (event_id: ${eventId})`);
 
     // Browser-side pixels
     trackMetaPageView(eventId);
     trackTikTokPageView(eventId);
+    trackGAPageView(eventId);
 
     // Server-side API calls (non-blocking)
     const userData: TrackingUserData = {
@@ -99,19 +114,16 @@ export function useTracking() {
       fbp: cookies.fbp,
       ttclid: cookies.ttclid,
       ttp: cookies.ttp,
+      gaClientId,
     };
 
     sendServerEvent('/api/meta-event', 'PageView', eventId, userData);
     sendServerEvent('/api/tiktok-event', 'PageView', eventId, userData);
+    sendServerEvent('/api/google-event', 'PageView', eventId, userData);
   }, []);
 
   /**
-   * Track a Lead event (form submission) on both platforms.
-   * This should be called BEFORE the SalesAutopilot form submit.
-   *
-   * @param formData - User form data for PII matching
-   * @param product - Product name (e.g., "Történelem", "Magyar", "Kombo")
-   * @param value - Price value in HUF
+   * Track a Lead event (form submission).
    */
   const trackLead = useCallback(
     (
@@ -129,6 +141,8 @@ export function useTracking() {
       currency: string = 'HUF'
     ) => {
       const eventId = generateEventId();
+      const gaCookie = getCookie('_ga');
+      const gaClientId = gaCookie ? gaCookie.split('.').slice(-2).join('.') : undefined;
 
       trackingLog('General', `Lead (event_id: ${eventId})`, { product, value });
 
@@ -145,32 +159,25 @@ export function useTracking() {
       });
 
       // Browser-side pixels
-      trackMetaLead(eventId, {
-        value,
-        currency,
-        contentName: product,
-      });
+      trackMetaLead(eventId, { value, currency, contentName: product });
       trackTikTokLead(eventId);
+      trackGALead(eventId, { value, currency, contentName: product });
 
       // Build server-side payloads
       const userData = buildTrackingUserData(formData);
+      userData.gaClientId = gaClientId;
       const customData = buildLeadCustomData(product, value, currency);
 
       // Server-side API calls (non-blocking, fire-and-forget)
       sendServerEvent('/api/meta-event', 'Lead', eventId, userData, customData);
       sendServerEvent('/api/tiktok-event', 'Lead', eventId, userData, customData);
+      sendServerEvent('/api/google-event', 'Lead', eventId, userData, customData);
     },
     []
   );
 
   /**
-   * Track a Purchase event on both platforms.
-   * This should be called on the thank-you / confirmation page.
-   *
-   * @param formData - User data (can be read from stored cookies)
-   * @param product - Product name
-   * @param value - Purchase value in HUF
-   * @param contentIds - Optional product IDs
+   * Track a Purchase event.
    */
   const trackPurchase = useCallback(
     (
@@ -189,29 +196,25 @@ export function useTracking() {
       contentIds?: string[]
     ) => {
       const eventId = generateEventId();
+      const gaCookie = getCookie('_ga');
+      const gaClientId = gaCookie ? gaCookie.split('.').slice(-2).join('.') : undefined;
 
       trackingLog('General', `Purchase (event_id: ${eventId})`, { product, value });
 
       // Browser-side pixels
-      trackMetaPurchase(eventId, {
-        value,
-        currency,
-        contentName: product,
-        contentIds,
-      });
-      trackTikTokPurchase(eventId, {
-        value,
-        currency,
-        contentName: product,
-      });
+      trackMetaPurchase(eventId, { value, currency, contentName: product, contentIds });
+      trackTikTokPurchase(eventId, { value, currency, contentName: product });
+      trackGAPurchase(eventId, { value, currency, contentName: product, contentIds });
 
       // Build server-side payloads
       const userData = buildTrackingUserData(formData);
+      userData.gaClientId = gaClientId;
       const customData = buildPurchaseCustomData(product, value, currency, contentIds);
 
       // Server-side API calls
       sendServerEvent('/api/meta-event', 'Purchase', eventId, userData, customData);
       sendServerEvent('/api/tiktok-event', 'Purchase', eventId, userData, customData);
+      sendServerEvent('/api/google-event', 'Purchase', eventId, userData, customData);
     },
     []
   );

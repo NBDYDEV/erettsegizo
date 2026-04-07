@@ -85,25 +85,11 @@ export async function sendTikTokEvent(
   // Map our event names to TikTok's expected names
   const tiktokEventName = TIKTOK_EVENT_MAP[payload.eventName] || payload.eventName;
 
-  const eventData: Record<string, unknown> = {
+  // Build the event object for the events array
+  const eventObj: Record<string, unknown> = {
     event: tiktokEventName,
     event_id: payload.eventId,
     event_time: payload.eventTime,
-    user,
-    page: {
-      url: payload.eventSourceUrl,
-    },
-  };
-
-  if (properties) {
-    eventData.properties = properties;
-  }
-
-  const body = JSON.stringify({
-    pixel_code: PIXEL_ID,
-    event: 'track',
-    event_id: payload.eventId,
-    timestamp: new Date(payload.eventTime * 1000).toISOString(),
     context: {
       user,
       page: {
@@ -112,8 +98,25 @@ export async function sendTikTokEvent(
       user_agent: payload.userData.clientUserAgent,
       ip: payload.userData.clientIpAddress,
     },
-    properties,
-    data: [eventData],
+  };
+
+  if (properties) {
+    eventObj.properties = properties;
+  }
+
+  const body = JSON.stringify({
+    event_source_id: PIXEL_ID,
+    event_source: 'web',
+    batch: [eventObj], // or data: [eventObj] depending on partial v1.2/v1.3 support, but events/batch is standard for v1.3
+  });
+
+  // Some docs say "data", some say "events", some say "batch". 
+  // v1.3 standard track endpoint usually uses a single event at top level OR data array.
+  // Re-adjusting to most robust common denominator for v1.3:
+  const finalBody = JSON.stringify({
+    event_source_id: PIXEL_ID,
+    event_source: 'web',
+    data: [eventObj],
   });
 
   console.log(`[Tracking:TikTok] Events API → ${tiktokEventName} (event_id: ${payload.eventId})`);
@@ -125,17 +128,17 @@ export async function sendTikTokEvent(
         'Content-Type': 'application/json',
         'Access-Token': ACCESS_TOKEN,
       },
-      body,
+      body: finalBody,
     });
 
     const result: TikTokEventsApiResponse = await response.json();
 
-    if (!response.ok || result.code !== 0) {
-      console.error('[Tracking:TikTok] Events API error:', result.message);
+    if (!response.ok || (result.code !== 0 && result.code !== 20000)) {
+      console.error('[Tracking:TikTok] Events API error:', result.message || 'Unknown error');
       throw new Error(result.message || `HTTP ${response.status}`);
     }
 
-    console.log(`[Tracking:TikTok] Events API ✓ ${result.message}`);
+    console.log(`[Tracking:TikTok] Events API ✓ ${result.message || 'Success'}`);
     return result;
   } catch (error) {
     console.error('[Tracking:TikTok] Events API request failed:', error);

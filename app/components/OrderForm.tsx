@@ -78,7 +78,6 @@ function AnimatedCheckbox({
     );
 }
 
-/* ─── floating label input ─── */
 function FormInput({
     label,
     required,
@@ -141,7 +140,6 @@ function FormInput({
     );
 }
 
-/* ─── section header ─── */
 function SectionHeader({
     icon: Icon,
     title,
@@ -168,7 +166,6 @@ function SectionHeader({
     );
 }
 
-/* ─── coupon input (collapse / expand / pill) ─── */
 function CouponSection({
     couponCode,
     setCouponCode,
@@ -217,7 +214,6 @@ function CouponSection({
         }
     };
 
-    // ── Valid: show removable pill ──
     if (couponStatus === "valid") {
         return (
             <motion.div
@@ -252,7 +248,6 @@ function CouponSection({
         <div className="h-full flex items-center">
             <AnimatePresence mode="wait">
                 {!isOpen ? (
-                    // ── Collapsed: subtle text trigger ──
                     <motion.button
                         key="coupon-trigger"
                         type="button"
@@ -278,7 +273,6 @@ function CouponSection({
                         />
                     </motion.button>
                 ) : (
-                    // ── Expanded: input field ──
                     <motion.div
                         key="coupon-input"
                         initial={{ opacity: 0, width: "200px" }}
@@ -460,7 +454,6 @@ export default function OrderForm() {
         }
         setIsSubmitting(true);
 
-        // ── Tracking: Fire Lead event BEFORE SAPI form submission ──
         const productNames: Record<string, string> = {
             'töri': 'Történelem kurzus',
             'magyar': 'Magyar kurzus',
@@ -481,7 +474,6 @@ export default function OrderForm() {
             'HUF'
         );
 
-        // Small delay to allow tracking fetch calls to fire
         setTimeout(() => {
             if (formRef.current) {
                 formRef.current.submit();
@@ -547,16 +539,17 @@ export default function OrderForm() {
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                     >
                         <form onSubmit={handleSubmit} className="space-y-12">
-                            {/* ═══ Section 0: Product Selection ═══ */}
                             {tier.subjects.length > 1 || tier.isCombo ? (
                                 <div>
                                     <SectionHeader icon={BookOpen} title="Válassz tantárgyat" step={1} />
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         {[
-                                            { id: "töri", label: "Történelem", icon: History },
-                                            { id: "magyar", label: "Magyar", icon: BookOpen },
-                                            { id: "kombo", label: "Kombo (Mindkettő)", icon: Sparkles, isCombo: true },
-                                        ].map((prod) => (
+                                            { id: "töri", label: "Történelem", icon: History, active: true, price: tier.price },
+                                            { id: "magyar", label: "Magyar", icon: BookOpen, active: tier.subjects.includes("magyar"), price: tier.price },
+                                            { id: "kombo", label: "Kombo (Mindkettő)", icon: Sparkles, isCombo: true, active: tier.isCombo, price: tier.comboPrice },
+                                        ]
+                                        .filter(p => p.active)
+                                        .map((prod) => (
                                             <motion.button
                                                 key={prod.id}
                                                 type="button"
@@ -577,6 +570,9 @@ export default function OrderForm() {
                                                     <prod.icon size={22} strokeWidth={2.5} />
                                                 </div>
                                                 <span className="font-poppins-bold text-black text-[15px]">{prod.label}</span>
+                                                <span className={`text-xs font-poppins-bold mt-1 ${selectedProduct === prod.id ? "text-black/60" : "text-black/30"}`}>
+                                                    {formatPrice(prod.price)}
+                                                </span>
                                                 {prod.isCombo && (
                                                     <span className="absolute -top-2 -right-2 bg-black text-white text-[9px] font-poppins-bold px-2 py-1 rounded-lg uppercase tracking-wider">
                                                         Legjobb érték
@@ -598,8 +594,6 @@ export default function OrderForm() {
                                     </div>
                                 </div>
                             ) : null}
-
-                            {/* ═══ Section 1: Personal ═══ */}
                             <div>
                                 <SectionHeader icon={User} title="Résztvevő adatai" step={tier.subjects.length > 1 ? 2 : 1} />
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -638,18 +632,14 @@ export default function OrderForm() {
                                     />
                                 </div>
                             </div>
-
-                            {/* divider */}
                             <div className="flex items-center gap-4">
                                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
                             </div>
 
-                            {/* ═══ Section 2: Billing ═══ */}
                             <div>
                                 <SectionHeader icon={MapPin} title="Számlázási cím" step={tier.subjects.length > 1 ? 3 : 2} />
                                 <div className="space-y-4">
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        {/* Country select */}
                                         <div className="relative group">
                                             <select
                                                 name="mssys_bill_country"
@@ -673,7 +663,6 @@ export default function OrderForm() {
                                             <label className="absolute left-5 top-2.5 text-[9px] font-poppins-bold tracking-wider uppercase text-black/30 pointer-events-none">
                                                 Ország *
                                             </label>
-                                            {/* dropdown arrow */}
                                             <svg
                                                 className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-black/20 pointer-events-none"
                                                 fill="none"
@@ -714,7 +703,6 @@ export default function OrderForm() {
                                         placeholder="Fő utca 12. 3/4."
                                     />
 
-                                    {/* Comment */}
                                     <div className="relative group">
                                         <textarea
                                             name="mssys_comment"
@@ -739,7 +727,6 @@ export default function OrderForm() {
                                 </div>
                             </div>
 
-                            {/* VAT Statement */}
                             <div className="bg-black/[0.02] border border-black/[0.05] rounded-2xl p-5 mt-4">
                                 <p className="text-[13px] text-black/50 font-poppins-med leading-relaxed flex items-start gap-3">
                                     <Info size={16} className="shrink-0 mt-0.5 text-black/30" />
@@ -749,16 +736,13 @@ export default function OrderForm() {
                                 </p>
                             </div>
 
-                            {/* divider */}
                             <div className="flex items-center gap-4">
                                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
                             </div>
 
-                            {/* ═══ Section 3: Payment & Coupon ═══ */}
                             <div>
                                 <SectionHeader icon={CreditCard} title="Fizetés" step={tier.subjects.length > 1 ? 4 : 3} />
                                 <div className="space-y-5">
-                                    {/* Payment method cards */}
                                     <div className="grid grid-cols-2 gap-3">
                                         <motion.button
                                             type="button"
@@ -801,7 +785,7 @@ export default function OrderForm() {
                                                         : "text-black/25"
                                                         }`}
                                                 >
-                                                    Azonnali
+                                                    Azonnali fizetés a Barion rendszerén keresztül
                                                 </p>
                                             </div>
                                             <img
@@ -812,7 +796,6 @@ export default function OrderForm() {
                                                     }`}
                                                 alt="Barion"
                                             />
-                                            {/* checkmark */}
                                             <AnimatePresence>
                                                 {paymentMethod === "barion" && (
                                                     <motion.div
@@ -838,7 +821,6 @@ export default function OrderForm() {
                                             </AnimatePresence>
                                         </motion.button>
 
-                                        {/* Transfer */}
                                         <motion.button
                                             type="button"
                                             onClick={() => setPaymentMethod("transfer")}
@@ -875,14 +857,6 @@ export default function OrderForm() {
                                                     Díjbekérő e-mailben
                                                 </p>
                                             </div>
-                                            <p
-                                                className={`text-[9px] font-poppins-bold uppercase tracking-[0.12em] mt-4 transition-colors duration-200 ${paymentMethod === "transfer"
-                                                    ? "text-black/30"
-                                                    : "text-black/15"
-                                                    }`}
-                                            >
-                                                Fizetési határidő: 2 nap
-                                            </p>
                                             <AnimatePresence>
                                                 {paymentMethod === "transfer" && (
                                                     <motion.div
@@ -908,8 +882,6 @@ export default function OrderForm() {
                                             </AnimatePresence>
                                         </motion.button>
                                     </div>
-
-                                    {/* Coupon — collapse/expand/pill */}
                                     <CouponSection
                                         couponCode={couponCode}
                                         setCouponCode={setCouponCode}
@@ -929,8 +901,6 @@ export default function OrderForm() {
                                 layout
                             >
                                 <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-
-                                    {/* --- Bal oldal: Összeg --- */}
                                     <div className="w-full lg:w-auto flex flex-col items-center lg:items-start space-y-2">
                                         <span className="text-white/40 font-poppins-bold text-[11px] uppercase tracking-[0.15em]">
                                             Fizetendő összeg
@@ -958,11 +928,7 @@ export default function OrderForm() {
                                             </motion.div>
                                         </div>
                                     </div>
-
-                                    {/* --- Jobb oldal: Checkboxok és Gomb --- */}
                                     <div className="w-full lg:w-[440px] flex flex-col gap-6">
-
-                                        {/* Üvegszerű (Glassmorphism) konténer a jogi dolgoknak */}
                                         <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 flex flex-col gap-4 backdrop-blur-md">
                                             <AnimatedCheckbox
                                                 required
@@ -994,8 +960,6 @@ export default function OrderForm() {
                                         <p className="text-[11px] text-white/30 font-poppins-med text-center italic">
                                             A "Megrendelem" gombra kattintva fizetési kötelezettséggel járó megrendelést adsz le.
                                         </p>
-
-                                        {/* Modernizált Submit Gomb */}
                                         <motion.button
                                             type="submit"
                                             disabled={isSubmitting}
@@ -1010,7 +974,6 @@ export default function OrderForm() {
                                                 group overflow-hidden
                                             "
                                         >
-                                            {/* Shimmer / Csillogás effekt a gombon belül */}
                                             <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none skew-x-12" />
 
                                             <div className="relative z-10 flex items-center justify-center gap-3">
@@ -1034,8 +997,6 @@ export default function OrderForm() {
                                 </div>
                             </motion.div>
                         </form>
-
-                        {/* Hidden SAPI Form */}
                         <form
                             ref={formRef}
                             action="https://info.erettsegizo.hu/t/sub"
@@ -1125,8 +1086,6 @@ export default function OrderForm() {
                             />
                         </form>
                     </motion.div>
-
-                    {/* ── trust bar ── */}
                     <motion.div
                         className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4"
                         initial={{ opacity: 0 }}
