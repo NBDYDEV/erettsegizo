@@ -11,28 +11,28 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: {
-		default: "Érettségiző - Az utolsó este az érettségi előtt",
+		default: "Érettségiző.hu - Az utolsó este az érettségi előtt",
 		template: "%s | Érettségiző.hu",
 	},
-	description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabb tételeket.",
+	description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
 	metadataBase: new URL("https://erettsegizo.hu"),
 	alternates: {
 		canonical: "/",
 	},
 	authors: [{ name: "Hegedüs Tamás e.v." }],
 	keywords: [
-		"magyar érettségi", "érettségi felkészítő", "magyar tételek", "utolsó este", "érettségi 2024", "kidolgozott tételek"
+		"érettségi", "érettségi felkészítő", "utolsó este", "érettségi 2024", "online felkészítő", "élő esemény"
 	],
 	openGraph: {
 		type: "website",
 		locale: "hu_HU",
 		url: "https://erettsegizo.hu",
 		siteName: "Érettségiző.hu",
-		title: "Érettségiző - Az utolsó este az érettségi előtt",
-		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabb tételeket közvetlenül a magyar érettségi előtt egy szervezett online eseményen!",
+		title: "Érettségiző.hu - Az utolsó este az érettségi előtt",
+		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
 		images: [
 			{
-				url: "/og-image.jpg", // Később cserélendő a tényleges Open Graph képre
+				url: "https://erettsegizo.hu/og-image.jpg",
 				width: 1200,
 				height: 630,
 				alt: "Érettségiző.hu - Az utolsó este az érettségi előtt",
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Érettségiző - Az utolsó este az érettségi előtt",
-		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabb tételeket közvetlenül a magyar érettségi előtt!",
-		images: ["/og-image.jpg"],
+		title: "Érettségiző.hu - Az utolsó este az érettségi előtt",
+		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
+		images: ["https://erettsegizo.hu/og-image.jpg"],
 	},
 };
 
