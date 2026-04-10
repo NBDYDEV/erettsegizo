@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 		template: "%s | Érettségiző.hu",
 	},
 	description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
-	metadataBase: new URL("https://erettsegizo.hu"),
+	metadataBase: new URL("https://utolsoeste.erettsegizo.hu"),
 	alternates: {
 		canonical: "/",
 	},
@@ -26,13 +26,13 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "website",
 		locale: "hu_HU",
-		url: "https://erettsegizo.hu",
+		url: "https://utolsoeste.erettsegizo.hu",
 		siteName: "Érettségiző.hu",
 		title: "Érettségiző.hu - Az utolsó este az érettségi előtt",
 		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
 		images: [
 			{
-				url: "https://erettsegizo.hu/og-image.jpg",
+				url: "https://utolsoeste.erettsegizo.hu/og-image.jpg",
 				width: 1200,
 				height: 630,
 				alt: "Érettségiző.hu - Az utolsó este az érettségi előtt",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Érettségiző.hu - Az utolsó este az érettségi előtt",
 		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
-		images: ["https://erettsegizo.hu/og-image.jpg"],
+		images: ["https://utolsoeste.erettsegizo.hu/og-image.jpg"],
 	},
 };
 
