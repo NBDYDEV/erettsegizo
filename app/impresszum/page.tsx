@@ -1,5 +1,14 @@
 import React from "react";
 import LegalPageLayout from "@/app/components/LegalPageLayout";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Impresszum",
+    description: "Az Érettségiző.hu szolgáltatójának és üzemeltetőjének impresszum adatai.",
+    alternates: {
+        canonical: "/impresszum",
+    },
+};
 
 export default function ImpresszumPage() {
     return (

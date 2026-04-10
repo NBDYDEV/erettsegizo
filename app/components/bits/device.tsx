@@ -22,7 +22,7 @@ export interface DeviceProps {
 const Device = React.forwardRef<HTMLDivElement, DeviceProps>(
     (
         {
-            image = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80",
+            image = "/images/phone.webp",
             scale = 1,
             isScrollable = false,
             enableParallax = true,

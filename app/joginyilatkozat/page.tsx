@@ -1,5 +1,14 @@
 import React from "react";
 import LegalPageLayout from "@/app/components/LegalPageLayout";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Jogi Nyilatkozat",
+    description: "Az Érettségiző.hu weboldal használatára vonatkozó jogi nyilatkozat.",
+    alternates: {
+        canonical: "/joginyilatkozat",
+    },
+};
 
 export default function JoginyilatkozatPage() {
     return (

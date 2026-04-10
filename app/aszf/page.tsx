@@ -1,5 +1,14 @@
 import React from "react";
 import LegalPageLayout from "@/app/components/LegalPageLayout";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Általános Szerződési Feltételek",
+    description: "Az Érettségiző.hu Konzorcium Általános Szerződési Feltételei.",
+    alternates: {
+        canonical: "/aszf",
+    },
+};
 
 export default function AszfPage() {
     return (

@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
     const [subjects, setSubjects] = useState<string[]>([]);
-    
+
     const pathname = usePathname();
     const isJelentkezes = pathname === "/jelentkezes";
 
@@ -36,7 +36,7 @@ export default function Footer() {
 
                     {!isJelentkezes && (
                         <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-[15px] font-poppins-med text-white/50">
-                            <Link href="/" className="hover:text-white transition-colors duration-300">Kezdőlap</Link>
+                            <Link href="https://erettsegizo.hu" className="hover:text-white transition-colors duration-300">Kezdőlap</Link>
                             {subjects.includes("magyar") && (
                                 <Link href="#magyar" className="hover:text-white transition-colors duration-300">Magyar</Link>
                             )}

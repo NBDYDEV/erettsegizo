@@ -7,7 +7,7 @@ const CARDS = [
     {
         title: "Nincs utazás",
         desc: "Nem kell utazni. Az már nem férne bele.",
-        img: "https://images.unsplash.com/photo-1645225400050-541fa1bf3131?q=80&w=2070",
+        img: "/images/photo-1645225400050-541fa1bf3131.webp",
         gridClass: "md:col-span-2 flex flex-col md:flex-row items-center",
         textClass: "md:w-1/2 p-6 sm:p-8 md:p-14 text-center md:text-left",
         imgContainerClass: "md:w-1/2 h-64 md:h-full w-full p-4 md:p-6",
@@ -16,7 +16,7 @@ const CARDS = [
     {
         title: "21:00-kor vége",
         desc: "21:00-kor vége. Az esti kakaó után már aludhatsz is!",
-        img: "https://images.unsplash.com/photo-1663416827757-c98066d93625?q=80&w=2037",
+        img: "/images/photo-1663416827757-c98066d93625.webp",
         gridClass: "flex flex-col items-center",
         textClass: "p-6 sm:p-8 md:p-10 text-center flex-grow",
         imgContainerClass: "w-full h-64 md:h-72 p-4 md:p-6 pt-0",
@@ -25,7 +25,7 @@ const CARDS = [
     {
         title: "Pihenés",
         desc: "Azonnal tudsz pihenni a saját ágyadban.",
-        img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070",
+        img: "/images/photo-1540555700478-4be289fbecef.webp",
         gridClass: "flex flex-col items-center",
         textClass: "p-6 sm:p-8 md:p-10 text-center flex-grow",
         imgContainerClass: "w-full h-64 md:h-72 p-4 md:p-6 pt-0",

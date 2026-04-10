@@ -32,24 +32,19 @@ function PriceUrgencyBlock() {
 export default function GuaranteeSection() {
     const slideData = [
         {
-            title: "Ceo Csaba",
-            button: "CEO & Alapító",
-            src: "https://images.unsplash.com/photo-1615109398623-88346a601842?q=80&w=687",
+            title: "Rédei Donát",
+            button: "Történelem felkészítő tanár",
+            src: "/images/tori/Donat.webp",
         },
         {
-            title: "Múlt Márta",
-            button: "Történelem tanár",
-            src: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=687",
+            title: "Kamráth Flórián",
+            button: "Történelem felkészítő tanár",
+            src: "/images/tori/Kuzi.webp",
         },
         {
-            title: "Magyar Péter",
-            button: "Magyar tanár",
-            src: "https://images.unsplash.com/photo-1590086782957-93c06ef21604?q=80&w=687",
-        },
-        {
-            title: "Teszt Titanilla",
-            button: "Magyar-történelem szakos tanár",
-            src: "https://images.unsplash.com/photo-1590650213165-c1fef80648c4?q=80&w=687",
+            title: "Szalai Attila",
+            button: "Történelem felkészítő tanár",
+            src: "/images/tori/Atiba.webp",
         },
     ];
     return (

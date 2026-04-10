@@ -1,5 +1,14 @@
 import React from "react";
 import LegalPageLayout from "@/app/components/LegalPageLayout";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Adatkezelési Tájékoztató",
+    description: "Az Érettségiző.hu adatkezelési és adatvédelmi tájékoztatója.",
+    alternates: {
+        canonical: "/adatvedelem",
+    },
+};
 
 export default function AdatvedelemPage() {
     return (

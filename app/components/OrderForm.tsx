@@ -25,6 +25,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { getCurrentPriceTier, formatPrice } from "@/app/lib/pricing";
 import { useTracking } from "@/hooks/useTracking";
+import Image from "next/image";
 
 function AnimatedCheckbox({
     checked,
@@ -548,49 +549,49 @@ export default function OrderForm() {
                                             { id: "magyar", label: "Magyar", icon: BookOpen, active: tier.subjects.includes("magyar"), price: tier.price },
                                             { id: "kombo", label: "Kombo (Mindkettő)", icon: Sparkles, isCombo: true, active: tier.isCombo, price: tier.comboPrice },
                                         ]
-                                        .filter(p => p.active)
-                                        .map((prod) => (
-                                            <motion.button
-                                                key={prod.id}
-                                                type="button"
-                                                onClick={() => setSelectedProduct(prod.id as any)}
-                                                whileTap={{ scale: 0.97 }}
-                                                className={`
+                                            .filter(p => p.active)
+                                            .map((prod) => (
+                                                <motion.button
+                                                    key={prod.id}
+                                                    type="button"
+                                                    onClick={() => setSelectedProduct(prod.id as any)}
+                                                    whileTap={{ scale: 0.97 }}
+                                                    className={`
                                                     relative flex flex-col items-center justify-center p-6 rounded-2xl border-[1.5px] transition-all duration-300 text-center
                                                     ${selectedProduct === prod.id
-                                                        ? "border-green bg-green/[0.04]"
-                                                        : "border-black/[0.06] bg-black/[0.01] hover:border-black/[0.12] hover:bg-black/[0.02]"
-                                                    }
+                                                            ? "border-green bg-green/[0.04]"
+                                                            : "border-black/[0.06] bg-black/[0.01] hover:border-black/[0.12] hover:bg-black/[0.02]"
+                                                        }
                                                 `}
-                                            >
-                                                <div className={`
+                                                >
+                                                    <div className={`
                                                     w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300
                                                     ${selectedProduct === prod.id ? "bg-green text-black" : "bg-black/[0.04] text-black/30"}
                                                 `}>
-                                                    <prod.icon size={22} strokeWidth={2.5} />
-                                                </div>
-                                                <span className="font-poppins-bold text-black text-[15px]">{prod.label}</span>
-                                                <span className={`text-xs font-poppins-bold mt-1 ${selectedProduct === prod.id ? "text-black/60" : "text-black/30"}`}>
-                                                    {formatPrice(prod.price)}
-                                                </span>
-                                                {prod.isCombo && (
-                                                    <span className="absolute -top-2 -right-2 bg-black text-white text-[9px] font-poppins-bold px-2 py-1 rounded-lg uppercase tracking-wider">
-                                                        Legjobb érték
+                                                        <prod.icon size={22} strokeWidth={2.5} />
+                                                    </div>
+                                                    <span className="font-poppins-bold text-black text-[15px]">{prod.label}</span>
+                                                    <span className={`text-xs font-poppins-bold mt-1 ${selectedProduct === prod.id ? "text-black/60" : "text-black/30"}`}>
+                                                        {formatPrice(prod.price)}
                                                     </span>
-                                                )}
-                                                {selectedProduct === prod.id && (
-                                                    <motion.div
-                                                        initial={{ scale: 0 }}
-                                                        animate={{ scale: 1 }}
-                                                        className="absolute top-3 right-3"
-                                                    >
-                                                        <div className="w-5 h-5 rounded-full bg-green flex items-center justify-center">
-                                                            <Check size={11} className="text-black" strokeWidth={4} />
-                                                        </div>
-                                                    </motion.div>
-                                                )}
-                                            </motion.button>
-                                        ))}
+                                                    {prod.isCombo && (
+                                                        <span className="absolute -top-2 -right-2 bg-black text-white text-[9px] font-poppins-bold px-2 py-1 rounded-lg uppercase tracking-wider">
+                                                            Legjobb érték
+                                                        </span>
+                                                    )}
+                                                    {selectedProduct === prod.id && (
+                                                        <motion.div
+                                                            initial={{ scale: 0 }}
+                                                            animate={{ scale: 1 }}
+                                                            className="absolute top-3 right-3"
+                                                        >
+                                                            <div className="w-5 h-5 rounded-full bg-green flex items-center justify-center">
+                                                                <Check size={11} className="text-black" strokeWidth={4} />
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                                </motion.button>
+                                            ))}
                                     </div>
                                 </div>
                             ) : null}
@@ -788,9 +789,11 @@ export default function OrderForm() {
                                                     Azonnali fizetés a Barion rendszerén keresztül
                                                 </p>
                                             </div>
-                                            <img
-                                                src="https://d1ursyhqs5x9h1.cloudfront.net/sw/images/Barion-smart-payment-horizontal-whitebg.png"
-                                                className={`h-4 object-contain mt-4 transition-opacity duration-300 ${paymentMethod === "barion"
+                                            <Image
+                                                src="/images/Barion-smart-payment-horizontal-whitebg.webp"
+                                                width={200}
+                                                height={40}
+                                                className={`h-4 w-auto object-contain mt-4 transition-opacity duration-300 ${paymentMethod === "barion"
                                                     ? "opacity-60"
                                                     : "opacity-20"
                                                     }`}
@@ -1093,9 +1096,11 @@ export default function OrderForm() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.4 }}
                     >
-                        <img
-                            src="https://d1ursyhqs5x9h1.cloudfront.net/sw/images/Barion-smart-payment-horizontal-whitebg.png"
-                            className="h-5 opacity-50"
+                        <Image
+                            src="/images/Barion-smart-payment-horizontal-whitebg.webp"
+                            width={200}
+                            height={40}
+                            className="h-5 w-auto opacity-50"
                             alt="Barion"
                         />
                     </motion.div>

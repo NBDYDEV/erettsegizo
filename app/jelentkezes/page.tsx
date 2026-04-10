@@ -1,12 +1,19 @@
 import React from "react";
-import OrderForm from "@/app/components/OrderForm";
+import OrderFormClient from "./OrderFormClient";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Jelentkezés a felkészítőre",
+    description: "Biztosítsd a helyed az intenzív érettségi felkészítőre! Készüljünk fel együtt célzottan, a legfontosabb magyar és történelem tételekből az utolsó pillanatban is.",
+    alternates: {
+        canonical: "/jelentkezes",
+    },
+};
 
 export default function JelentkezesPage() {
     return (
         <main className="w-full bg-white pt-32 pb-12">
-            <React.Suspense fallback={<div className="min-h-[500px] flex items-center justify-center font-poppins-med">Betöltés...</div>}>
-                <OrderForm />
-            </React.Suspense>
+            <OrderFormClient />
         </main>
     );
 }

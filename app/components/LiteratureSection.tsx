@@ -10,28 +10,28 @@ const STEPS = [
         number: "01",
         title: "Szövegértési–nyelvi feladatsor",
         desc: "Az érettségi első része a pontos szövegértésen és nyelvi ismereteken múlik. Átvesszük a típuskérdéseket és a leggyakoribb hibákat.",
-        image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2073",
+        image: "/images/photo-1456513080510-7bf3a84b82f8.webp",
         label: "Szövegértés",
     },
     {
         number: "02",
         title: "Irodalmi feladatlap",
         desc: "Rendszerezzük a legfontosabb irodalmi fogalmakat, korszakokat és életműveket, amelyek szükségesek a feladatlap sikeres megoldásához.",
-        image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2070",
+        image: "/images/photo-1516979187457-637abb4f9353.webp",
         label: "Műveltség",
     },
     {
         number: "03",
         title: "Műértelmező szövegalkotás",
         desc: "Megtanulod, hogyan elemezz egy művet motívumok, témák és szerkezet alapján, és hogyan építs fel egy jól strukturált, érettségi-kompatibilis esszét.",
-        image: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?q=80&w=2070",
+        image: "/images/photo-1474932430478-367dbb6832c1.webp",
         label: "Elemzés",
     },
     {
         number: "04",
         title: "Irodalmi témák és motívumok",
         desc: "Áttekintjük a leggyakoribb érettségi témákat és motívumokat, hogy gyorsan felismerd őket, és magabiztosan tudd alkalmazni az elemzéseidben.",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=2022",
+        image: "/images/photo-1503676260728-1c00da094a0b.webp",
         label: "Motívumok",
     }
 ];
