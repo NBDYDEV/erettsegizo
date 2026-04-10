@@ -9,21 +9,25 @@ html {
 @font-face {
     font-family: "Poppins-Medium";
     src: url("/fonts/Poppins-Medium.ttf");
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Poppins-SemiBold";
     src: url("/fonts/Poppins-SemiBold.ttf");
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Poppins-ExtraBold";
     src: url("/fonts/Poppins-ExtraBold.ttf");
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Poppins-Bold";
     src: url("/fonts/Poppins-Bold.ttf");
+    font-display: swap;
 }
 
 @layer components {

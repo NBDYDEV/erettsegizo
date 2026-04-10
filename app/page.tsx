@@ -1,13 +1,14 @@
 import Hero from "./components/Hero";
 import ProblemSection from "./components/ProblemSection";
 import TargetSection from "./components/TargetSection";
-import PricingSection from "./components/PricingSection";
-import GuaranteeSection from "./components/GuaranteeSection";
-import LiteratureSection from "./components/LiteratureSection";
-import HistorySection from "./components/HistorySection";
-import FAQ2 from "./components/bits/faq-2";
-import WhyOnlineSection from "./components/WhyOnlineSection";
+import dynamic from "next/dynamic";
 import SchemaOrg from "./components/SchemaOrg";
+
+const PricingSection = dynamic(() => import("./components/PricingSection"));
+const GuaranteeSection = dynamic(() => import("./components/GuaranteeSection"));
+const LiteratureSection = dynamic(() => import("./components/LiteratureSection"));
+const HistorySection = dynamic(() => import("./components/HistorySection"));
+const FAQ2 = dynamic(() => import("./components/bits/faq-2"));
 
 export default async function Home() {
     const organizationSchema = {
