@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { Check, ArrowRight, ShieldCheck, Mail } from "lucide-react";
+import { Check, ArrowRight, ShieldCheck, Mail, AlertCircle, MousePointerClick, Forward } from "lucide-react";
 import Link from "next/link";
 import { useTracking } from "@/hooks/useTracking";
 import { getStoredLeadData } from "@/lib/tracking";
@@ -34,20 +34,20 @@ export default function SikeresJelentkezesPage() {
     }, [trackPurchase]);
 
     return (
-        <section className="w-full min-h-[85vh] bg-[#fafaf9] pt-32 pb-24 flex items-center justify-center relative overflow-hidden">
+        <section className="w-full min-h-screen bg-[#fafaf9] pt-24 md:pt-32 pb-24 relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden">
                 <div className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-green/10 blur-[120px] rounded-full" />
                 <div className="absolute bottom-[0%] -left-[10%] w-[40%] h-[40%] bg-black/5 blur-[100px] rounded-full" />
             </div>
 
-            <div className="container-main px-4 relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center text-center">
+            <div className="container-main px-4 relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center">
                 
                 <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    className="w-24 h-24 bg-green rounded-[2rem] flex items-center justify-center shadow-xl shadow-green/20 mb-10"
+                    className="w-20 h-20 md:w-24 md:h-24 bg-green rounded-[2rem] flex items-center justify-center shadow-xl shadow-green/20 mb-8"
                 >
                     <Check size={48} className="text-black" strokeWidth={3.5} />
                 </motion.div>
@@ -56,52 +56,83 @@ export default function SikeresJelentkezesPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="font-poppins-extrab text-4xl sm:text-5xl md:text-6xl text-black mb-6 leading-tight"
+                    className="font-poppins-extrab text-3xl sm:text-5xl md:text-6xl text-black mb-4 leading-tight text-center"
                 >
-                    Sikeres <span className="bg-green px-3 md:px-4 py-1 ml-1 rounded-xl">jelentkezés!</span>
+                    Sikeresen <span className="bg-green px-3 py-1 ml-1 rounded-xl whitespace-nowrap">jelentkeztél!</span>
                 </motion.h1>
 
-                <motion.div 
+                <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg border border-black/[0.03] w-full mt-4 flex flex-col gap-6"
+                    className="font-poppins-med text-base md:text-lg text-black/60 text-center max-w-2xl mb-12"
                 >
-                    <p className="font-poppins-med text-lg md:text-xl text-black/80 leading-relaxed">
-                        Köszönjük a rendelésed, minden szuperül működött! A helyedet sikeresen befoglaltuk az utolsó esti ismétlésre.
+                    A megadott e-mail címedre elküldtünk minden további információt! Ha nem találod, kérjük ellenőrizd a <span className="font-poppins-bold underline decoration-green decoration-2 underline-offset-4">promóciók</span> fülnél, illetve a spam mappában is.
+                </motion.p>
+
+                {/* GMAIL TUTORIAL SECTION */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="w-full bg-white rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-black/[0.03] flex flex-col items-center"
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-black/5 rounded-xl flex items-center justify-center text-black/60">
+                            <AlertCircle size={20} strokeWidth={2.5} />
+                        </div>
+                        <h2 className="font-poppins-bold text-xl md:text-2xl text-black">Fontos teendőd Gmail esetén</h2>
+                    </div>
+                    
+                    <p className="font-poppins-med text-sm md:text-base text-black/70 text-center max-w-3xl mb-10 leading-relaxed">
+                        Hogy a továbbiakban biztosan megérkezzenek a levelek, és azonnal megkaphass minden linket és információt az ismétlésről, a következő három gyors lépésre van szükséged:
                     </p>
 
-                    <div className="flex flex-col gap-4 mt-2">
-                        <div className="bg-[#fafaf9] rounded-2xl p-5 flex items-start gap-4 text-left border border-black/5">
-                            <div className="w-10 h-10 bg-black/5 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <Mail size={20} className="text-black/60" strokeWidth={2.5} />
-                            </div>
-                            <div>
-                                <h3 className="font-poppins-bold text-black mb-1">Nézd meg az e-mail fiókodat!</h3>
-                                <p className="font-poppins-med text-sm text-black/60 leading-relaxed">
-                                    Küldtünk egy visszaigazoló levelet a részletekkel. Kérlek, olvasd el figyelmesen, ott minden további lépést megtalálsz. (Nézz be a Promóciók/Spam mappába is biztos ami biztos!)
-                                </p>
+                    <div className="w-full grid grid-cols-1 gap-12">
+                        {/* Step 1 */}
+                        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                            <div className="w-12 h-12 shrink-0 bg-green/20 text-black font-poppins-extrab text-2xl rounded-2xl flex items-center justify-center">1</div>
+                            <div className="flex-1 w-full flex flex-col gap-4">
+                                <h3 className="font-poppins-bold text-lg text-black">Lépj be a Gmail fiókodba, és kattints a Promóciók fülre!</h3>
+                                <div className="border-4 border-black/5 rounded-2xl overflow-hidden shadow-inner w-full">
+                                    <img src="https://erettsegizo.hu/wp-content/uploads/2019/12/email1.jpg" alt="Gmail Promóciók Fül" className="w-full h-auto object-contain" />
+                                </div>
                             </div>
                         </div>
 
-                        <div className="bg-[#fafaf9] rounded-2xl p-5 flex items-start gap-4 text-left border border-black/5">
-                            <div className="w-10 h-10 bg-black/5 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <ShieldCheck size={20} className="text-black/60" strokeWidth={2.5} />
+                        {/* Step 2 */}
+                        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                            <div className="w-12 h-12 shrink-0 bg-green/20 text-black font-poppins-extrab text-2xl rounded-2xl flex items-center justify-center">2</div>
+                            <div className="flex-1 w-full flex flex-col gap-4">
+                                <h3 className="font-poppins-bold text-lg text-black flex items-center gap-2">
+                                    Az erettsegizo.hu levelét <span className="bg-black text-white px-2 py-0.5 rounded-lg text-sm">húzd át</span> az Elsődleges mappába!
+                                </h3>
+                                <div className="border-4 border-black/5 rounded-2xl overflow-hidden shadow-inner w-full flex items-center justify-center bg-gray-50 p-2 md:p-4">
+                                    <img src="https://erettsegizo.hu/wp-content/uploads/2019/12/promociok.gif" alt="Húzd az Elsődlegesbe" className="max-w-full h-auto object-contain rounded-xl" />
+                                </div>
                             </div>
-                            <div>
-                                <h3 className="font-poppins-bold text-black mb-1">Fizetés / Számla</h3>
-                                <p className="font-poppins-med text-sm text-black/60 leading-relaxed">
-                                    A fizetés módjától (átutalás vagy kártya) függően már úton van feléd az adómentes számla, illetve átutalás esetén a díjbekérő is.
-                                </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                            <div className="w-12 h-12 shrink-0 bg-green/20 text-black font-poppins-extrab text-2xl rounded-2xl flex items-center justify-center">3</div>
+                            <div className="flex-1 w-full flex flex-col gap-4">
+                                <h3 className="font-poppins-bold text-lg text-black">
+                                    A lenn felugró ablakban erősítsd meg a műveletet: kattints az <span className="text-green uppercase tracking-widest bg-black px-2 py-1 rounded-md text-sm mx-1">Igen</span>-re!
+                                </h3>
+                                <div className="border-4 border-black/5 rounded-2xl overflow-hidden shadow-inner w-full md:w-3/4 bg-[#323232] p-4 flex justify-center mx-auto md:mx-0">
+                                    <img src="https://erettsegizo.hu/wp-content/uploads/2019/12/gmail3.jpg" alt="Kattints az Igenre" className="max-w-full h-auto object-contain" />
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.5 }}
                     className="mt-12"
                 >
                     <Link
