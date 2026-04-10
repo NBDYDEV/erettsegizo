@@ -61,7 +61,17 @@ export default async function RootLayout({
 			</head>
 			<body className="font-rem antialiased overflow-x-hidden">
 				<Toaster position="top-center" richColors />
-				{/* <TrackingScripts /> */}
+				<TrackingScripts />
+				{/* Meta Pixel noscript fallback */}
+				<noscript>
+					<img
+						height="1"
+						width="1"
+						style={{ display: 'none' }}
+						src="https://www.facebook.com/tr?id=1885987768762342&ev=PageView&noscript=1"
+						alt=""
+					/>
+				</noscript>
 				<Navbar />
 				<main id="main-content" role="main">
 					{children}
