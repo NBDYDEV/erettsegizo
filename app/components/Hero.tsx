@@ -13,34 +13,22 @@ const StaggeredText = dynamic(() => import('./bits/staggered-text'), { ssr: fals
 
 export default function Hero() {
     const [subjects, setSubjects] = useState<string[]>([]);
-    const [isDesktop, setIsDesktop] = useState(false);
 
     useEffect(() => {
         setSubjects(getActiveSubjects());
-        // Only load heavy 3D/animation components on desktop (>= 1024px)
-        const mql = window.matchMedia('(min-width: 1024px)');
-        setIsDesktop(mql.matches);
-        const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-        mql.addEventListener('change', handler);
-        return () => mql.removeEventListener('change', handler);
     }, []);
 
     return (
         <div className="w-full bg-white relative overflow-x-hidden">
             <section className="relative w-full bg-primary rounded-b-none lg:rounded-b-[6rem] pt-32 pb-56 lg:pb-80 xl:pb-96 overflow-hidden z-10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
-                {/* Mobile: lightweight CSS gradient | Desktop: WebGL GlitterWarp */}
                 <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-                    {isDesktop ? (
-                        <GlitterWarp
-                            speed={1.5}
-                            color="#CEFF06"
-                            density={20}
-                            brightness={1.5}
-                            starSize={0.15}
-                        />
-                    ) : (
-                        <div className="w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(206,255,6,0.15)_0%,transparent_60%)]" />
-                    )}
+                    <GlitterWarp
+                        speed={1.5}
+                        color="#CEFF06"
+                        density={20}
+                        brightness={1.5}
+                        starSize={0.15}
+                    />
                 </div>
 
                 <div className="container-main relative z-10 flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-4 px-4 sm:px-6 lg:px-8">
@@ -133,26 +121,20 @@ export default function Hero() {
 
                 </div>
             </section>
-
-            {/* Device phone mockup - only on desktop to avoid loading Three.js/motion on mobile */}
-            {isDesktop ? (
-                <div className="relative z-20 flex justify-center w-full mt-[-180px] sm:mt-[-190px] md:mt-[-190px] lg:mt-[-350px] xl:mt-[-400px] pointer-events-none px-4">
-                    <div className="h-[660px] sm:h-[670px] md:h-[690px] lg:h-[740px] xl:h-[760px] flex justify-center pointer-events-auto overflow-visible">
-                        <div className="origin-top scale-[0.56] sm:scale-[0.56] md:scale-[0.55] lg:scale-[0.6] xl:scale-[0.62] rounded-[6rem] relative">
-                            <Device
-                                isScrollable={false}
-                                scale={1}
-                                enableParallax={false}
-                                enableRotate={false}
-                            >
-                                <MessengerChat />
-                            </Device>
-                        </div>
+            <div className="relative z-20 flex justify-center w-full mt-[-180px] sm:mt-[-190px] md:mt-[-190px] lg:mt-[-350px] xl:mt-[-400px] pointer-events-none px-4">
+                <div className="h-[660px] sm:h-[670px] md:h-[690px] lg:h-[740px] xl:h-[760px] flex justify-center pointer-events-auto overflow-visible">
+                    <div className="origin-top scale-[0.56] sm:scale-[0.56] md:scale-[0.55] lg:scale-[0.6] xl:scale-[0.62] rounded-[6rem] relative">
+                        <Device
+                            isScrollable={false}
+                            scale={1}
+                            enableParallax={false}
+                            enableRotate={false}
+                        >
+                            <MessengerChat />
+                        </Device>
                     </div>
                 </div>
-            ) : (
-                <div className="h-8" />
-            )}
+            </div>
 
         </div>
     );
