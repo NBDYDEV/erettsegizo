@@ -58,6 +58,12 @@ export default async function RootLayout({
 				<link rel="icon" href="/favicon.ico" sizes="any" />
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				<meta name="theme-color" content="#0B937C" />
+				
+				{/* Preload fonts to eliminate render-blocking */}
+				<link rel="preload" href="/fonts/Poppins-Medium.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+				<link rel="preload" href="/fonts/Poppins-SemiBold.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+				<link rel="preload" href="/fonts/Poppins-ExtraBold.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+				<link rel="preload" href="/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
 			</head>
 			<body className="font-rem antialiased overflow-x-hidden">
 				<Toaster position="top-center" richColors />

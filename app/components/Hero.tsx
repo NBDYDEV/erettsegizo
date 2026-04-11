@@ -68,14 +68,16 @@ export default function Hero() {
 
                 <div className="container-main relative z-10 flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-4 px-4 sm:px-6 lg:px-8">
                     <div className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left z-10 lg:pt-8">
-                        <div className="flex flex-col items-center lg:items-start mb-6 w-full">
-                            {subjects.length > 0 && (
+                        <div className="flex flex-col items-center lg:items-start mb-6 w-full min-h-[44px]">
+                            {subjects.length > 0 ? (
                                 <div className="mb-4 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 inline-flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-green animate-pulse" />
                                     <span className="text-white font-poppins-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">
                                         Aktuális tantárgy: {subjects.map(s => "Középszintű " + (s.charAt(0).toUpperCase() + s.slice(1))).join(" & ")}
                                     </span>
                                 </div>
+                            ) : (
+                                <div className="mb-4 h-[30px] md:h-[32px] w-full" />
                             )}
                             <h1 className="text-white flex flex-col items-center lg:items-start">
                                 <span className="font-poppins-semib text-4xl md:text-5xl xl:text-[4rem] leading-tight mb-1">
