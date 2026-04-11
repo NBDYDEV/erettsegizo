@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Device from './bits/device';
+import dynamic from 'next/dynamic';
 import StaggeredText from './bits/staggered-text';
 import { CheckCircle, Clock, Zap, Lightbulb, Moon } from 'lucide-react';
-import GlitterWarp from './bits/glitter-warp';
 import Image from 'next/image';
 import { getActiveSubjects } from '@/app/lib/pricing';
-import TikTokFeed from './TikTokFeed';
-import MessengerChat from './MessengerChat';
+
+const GlitterWarp = dynamic(() => import('./bits/glitter-warp'), { ssr: false });
+const Device = dynamic(() => import('./bits/device'), { ssr: false });
+const MessengerChat = dynamic(() => import('./MessengerChat'), { ssr: false });
 import Link from 'next/link';
 
 const appleContentItems = [
