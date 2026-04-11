@@ -104,7 +104,7 @@ export default function PricingSection() {
                     </div>
 
                     <div className="w-full max-w-2xl mb-6 flex flex-col items-center gap-2">
-                        <p className="flex items-center gap-2 text-sm font-poppins-bold uppercase tracking-[0.15em] text-red-500">
+                        <p className="flex items-center gap-2 text-sm font-poppins-bold uppercase tracking-[0.15em] text-red-700">
                             <Clock className="w-4 h-4 shrink-0" strokeWidth={3} /> {tier.label} {tier.deadlineLabel}-ig: {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}
                         </p>
                         <NavCountdown dark large />
@@ -120,7 +120,7 @@ export default function PricingSection() {
 
                 <div className="w-full max-w-5xl mt-32 flex flex-col items-center">
 
-                    <p className="text-gray-400 font-poppins-med text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.35em] uppercase mb-4 md:mb-6">
+                    <p className="text-gray-600 font-poppins-med text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.35em] uppercase mb-4 md:mb-6">
                         Rólad van szó
                     </p>
 

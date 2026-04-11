@@ -54,8 +54,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     const { src, button, title } = slide;
 
     return (
-        <div className="[perspective:1200px] [transform-style:preserve-3d]">
-            <li
+        <li className="[perspective:1200px] [transform-style:preserve-3d] list-none">
+            <div
                 ref={slideRef}
                 className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10"
                 style={{
@@ -100,8 +100,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
                         {button}
                     </p>
                 </article>
-            </li>
-        </div>
+            </div>
+        </li>
     );
 };
 
@@ -121,6 +121,7 @@ const CarouselControl = ({
             className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-200 dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${type === "previous" ? "rotate-180" : ""
                 }`}
             title={title}
+            aria-label={title}
             onClick={handleClick}
         >
             <IconArrowNarrowRight className="text-neutral-600 dark:text-neutral-200" />

@@ -299,7 +299,7 @@ export default function MessengerChat() {
                         Érettek leszünk?! 😂
                     </p>
                     <p
-                        className="text-gray-400 text-[0.7rem]"
+                        className="text-gray-500 text-[0.7rem]"
                         style={{ fontFamily: "system-ui" }}
                     >
                         Aktív most

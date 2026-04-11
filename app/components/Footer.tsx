@@ -46,11 +46,11 @@ export default function Footer() {
                         </div>
                     )}
 
-                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] font-poppins text-white/30 mt-4 md:mt-0">
-                        <Link href="/aszf" className="hover:text-white transition-colors underline decoration-white/10">ÁSZF</Link>
-                        <Link href="/adatvedelem" className="hover:text-white transition-colors underline decoration-white/10">Adatvédelem</Link>
-                        <Link href="/impresszum" className="hover:text-white transition-colors underline decoration-white/10">Impresszum</Link>
-                        <Link href="/joginyilatkozat" className="hover:text-white transition-colors underline decoration-white/10">Jognyilatkozat</Link>
+                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[12px] font-poppins text-white/50 mt-4 md:mt-0">
+                        <Link href="/aszf" className="hover:text-white transition-colors underline decoration-white/20">ÁSZF</Link>
+                        <Link href="/adatvedelem" className="hover:text-white transition-colors underline decoration-white/20">Adatvédelem</Link>
+                        <Link href="/impresszum" className="hover:text-white transition-colors underline decoration-white/20">Impresszum</Link>
+                        <Link href="/joginyilatkozat" className="hover:text-white transition-colors underline decoration-white/20">Jognyilatkozat</Link>
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@ export default function Footer() {
                     </p>
                 </div>
 
-                <div className="mt-12 text-center text-[13px] text-white/30 font-poppins tracking-wider uppercase">
+                <div className="mt-12 text-center text-[13px] text-white/50 font-poppins tracking-wider uppercase">
                     &copy; {new Date().getFullYear()} Érettségiző. Minden jog fenntartva.
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { NavCountdown } from "./Navbar";
 import { getCurrentPriceTier, formatPrice } from "@/app/lib/pricing";
 import { Clock } from "lucide-react";
 import Carousel from "./bits/carousel";
+import Link from "next/link";
 
 function PriceUrgencyBlock() {
     const [tier, setTier] = useState<any>(null);
@@ -18,13 +19,13 @@ function PriceUrgencyBlock() {
 
     return (
         <div className="w-full max-w-2xl bg-white rounded-3xl p-8 flex flex-col items-center gap-4">
-            <p className="flex items-center gap-2 text-sm font-poppins-bold uppercase tracking-[0.15em] text-red-500">
+            <p className="flex items-center gap-2 text-sm font-poppins-bold uppercase tracking-[0.15em] text-red-700">
                 <Clock className="w-4 h-4 shrink-0" strokeWidth={3} /> {tier.label} {tier.deadlineLabel}-ig: {formatPrice(tier.isCombo ? tier.comboPrice : tier.price)}
             </p>
             <NavCountdown dark large />
-            <button className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg">
+            <Link href="/jelentkezes" className="bg-[#ff3b30] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg">
                 <span>Jelentkezem</span>
-            </button>
+            </Link>
         </div>
     );
 }

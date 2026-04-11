@@ -136,6 +136,7 @@ export default function FAQ2() {
 
                                     <button
                                         onClick={() => toggleFAQ(index)}
+                                        aria-label={openIndex === index ? "Kérdés bezárása" : "Kérdés megnyitása"}
                                         className={`shrink-0 w-6 h-6 sm:w-7 sm:h-7 rounded-full border flex items-center justify-center transition-colors duration-200 mt-3 ${openIndex === index
                                             ? "border-blue-500/50 hover:border-blue-400"
                                             : "border-neutral-400 dark:border-neutral-600 hover:border-neutral-500 dark:hover:border-neutral-400"
