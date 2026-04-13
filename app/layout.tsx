@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 		default: "Érettségiző.hu - Az utolsó este az érettségi előtt",
 		template: "%s | Érettségiző.hu",
 	},
-	description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
+	description: "Utolsó esti érettségi felkészítő: 4 órában átvesszük a legfontosabbakat, hogy magabiztosan menj vizsgázni. Csatlakozz most!",
 	metadataBase: new URL("https://utolsoeste.erettsegizo.hu"),
 	alternates: {
 		canonical: "/",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 		url: "https://utolsoeste.erettsegizo.hu",
 		siteName: "Érettségiző.hu",
 		title: "Érettségiző.hu - Az utolsó este az érettségi előtt",
-		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
+		description: "Utolsó esti érettségi felkészítő: 4 órában átvesszük a legfontosabbakat, hogy magabiztosan menj vizsgázni. Csatlakozz most!",
 		images: [
 			{
 				url: "https://utolsoeste.erettsegizo.hu/og-image.jpg",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title: "Érettségiző.hu - Az utolsó este az érettségi előtt",
-		description: "Célzott érettségi felkészítő az utolsó pillanatban. Ismételjük át együtt a legfontosabbakat közvetlenül az érettségi előtt egy szervezett online eseményen!",
+		description: "Utolsó esti érettségi felkészítő: 4 órában átvesszük a legfontosabbakat, hogy magabiztosan menj vizsgázni. Csatlakozz most!",
 		images: ["https://utolsoeste.erettsegizo.hu/og-image.jpg"],
 	},
 };
