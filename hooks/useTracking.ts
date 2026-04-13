@@ -14,6 +14,7 @@ import {
   trackTikTokPageView,
   trackTikTokLead,
   trackTikTokPurchase,
+  identifyTikTokUser,
   trackGAPageView,
   trackGALead,
   trackGAPurchase,
@@ -159,6 +160,7 @@ export function useTracking() {
       });
 
       // Browser-side pixels
+      identifyTikTokUser(formData.email, formData.phone);
       trackMetaLead(eventId, { value, currency, contentName: product });
       trackTikTokLead(eventId);
       trackGALead(eventId, { value, currency, contentName: product });
@@ -202,6 +204,7 @@ export function useTracking() {
       trackingLog('General', `Purchase (event_id: ${eventId})`, { product, value });
 
       // Browser-side pixels
+      identifyTikTokUser(formData.email, formData.phone);
       trackMetaPurchase(eventId, { value, currency, contentName: product, contentIds });
       trackTikTokPurchase(eventId, { value, currency, contentName: product });
       trackGAPurchase(eventId, { value, currency, contentName: product, contentIds });

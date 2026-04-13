@@ -46,6 +46,7 @@ export {
   trackTikTokPageView,
   trackTikTokLead,
   trackTikTokPurchase,
+  identifyTikTokUser,
 } from './tiktok-pixel';
 
 // TikTok Events API (server-side)

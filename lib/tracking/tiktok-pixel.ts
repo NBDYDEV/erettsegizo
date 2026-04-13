@@ -117,3 +117,33 @@ export function trackTikTokPurchase(
 
   trackTikTokEvent('CompletePayment', eventId, params);
 }
+
+/**
+ * Identify user for TikTok Advanced Matching.
+ * TikTok automatically hashes cleartext email/phone before sending.
+ */
+export function identifyTikTokUser(email?: string, phone?: string): void {
+  if (!PIXEL_ID) return;
+
+  if (!isTtqReady()) {
+    setTimeout(() => identifyTikTokUser(email, phone), 500);
+    return;
+  }
+
+  const identifyParams: Record<string, string> = {};
+  if (email) identifyParams.email = email.trim().toLowerCase();
+  
+  if (phone) {
+    // Basic phone formatting: remove spaces/dashes. Assuming mostly +36..
+    let formattedPhone = phone.trim().replace(/[^\d+]/g, '');
+    if (formattedPhone.startsWith('06')) {
+        formattedPhone = '+36' + formattedPhone.slice(2);
+    }
+    identifyParams.phone_number = formattedPhone;
+  }
+
+  if (Object.keys(identifyParams).length > 0) {
+    window.ttq.identify(identifyParams);
+    trackingLog('TikTok', 'Pixel identify', identifyParams);
+  }
+}
