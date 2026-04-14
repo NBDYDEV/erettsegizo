@@ -409,16 +409,19 @@ export default function OrderForm() {
 
     const validateForm = () => {
         if (
-            !formData.mssys_lastname ||
-            !formData.mssys_firstname ||
-            !formData.email ||
-            !formData.mssys_mobile
+            !formData.mssys_lastname.trim() ||
+            !formData.mssys_firstname.trim() ||
+            !formData.email.trim() ||
+            !formData.mssys_mobile.trim()
         )
             return false;
+        // Validate phone: must be at least 9 digits (e.g. +36301234567, 06301234567)
+        const phoneDigits = formData.mssys_mobile.replace(/\D/g, '');
+        if (phoneDigits.length < 9) return false;
         if (
-            !formData.mssys_bill_zip ||
-            !formData.mssys_bill_city ||
-            !formData.mssys_bill_address
+            !formData.mssys_bill_zip.trim() ||
+            !formData.mssys_bill_city.trim() ||
+            !formData.mssys_bill_address.trim()
         )
             return false;
         if (!formData.aszf_gdpr || !formData.adatvedelmi_gdpr) return false;
@@ -663,6 +666,7 @@ export default function OrderForm() {
                                         required
                                         label="Telefonszám"
                                         name="mssys_mobile"
+                                        type="tel"
                                         value={formData.mssys_mobile}
                                         onChange={handleChange}
                                         placeholder="+36 30 123 4567"
@@ -1065,6 +1069,7 @@ export default function OrderForm() {
                                 type="hidden"
                                 name="mssys_mobile"
                                 value={formData.mssys_mobile}
+                                required
                             />
                             <input
                                 type="hidden"
