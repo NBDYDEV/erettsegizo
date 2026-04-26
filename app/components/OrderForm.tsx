@@ -393,6 +393,14 @@ export default function OrderForm() {
         }
     }, []);
 
+    useEffect(() => {
+        if (couponStatus === "valid" && couponCode.toUpperCase() === "MAGYAR001" && selectedProduct !== "magyar") {
+            setCouponStatus("invalid");
+            setCouponError("Ez a kuponkód csak a magyar felkészítőre érvényes!");
+            setDiscount(0);
+        }
+    }, [selectedProduct, couponCode, couponStatus]);
+
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
@@ -454,6 +462,13 @@ export default function OrderForm() {
         if (!couponCode) return;
         setCouponStatus("checking");
         setCouponError("");
+
+        if (couponCode.toUpperCase() === "MAGYAR001" && selectedProduct !== "magyar") {
+            setCouponStatus("invalid");
+            setCouponError("Ez a kuponkód csak a magyar felkészítőre érvényes!");
+            setDiscount(0);
+            return;
+        }
 
         const NL_ID = "168092";
         const NS_ID = "329707";
