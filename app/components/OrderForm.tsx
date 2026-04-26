@@ -246,7 +246,7 @@ function CouponSection({
     }
 
     return (
-        <div className="h-full flex items-center">
+        <div>
             <AnimatePresence mode="wait">
                 {!isOpen ? (
                     <motion.button
@@ -258,19 +258,27 @@ function CouponSection({
                         transition={{ duration: 0.15 }}
                         onClick={() => setIsOpen(true)}
                         className="
-                            group flex items-center gap-2
-                            text-[13px] font-poppins-med text-black/30
-                            hover:text-black/55 transition-colors duration-200
+                            group w-full flex items-center gap-3
+                            p-4 rounded-2xl border-[1.5px] border-dashed border-black/[0.12]
+                            bg-black/[0.02] hover:bg-black/[0.04] hover:border-black/[0.2]
+                            transition-all duration-200
                         "
                     >
-                        <Ticket size={14} strokeWidth={2.5} className="shrink-0" />
-                        <span className="border-b border-dashed border-current pb-px">
-                            Van kuponkódod?
-                        </span>
+                        <div className="w-10 h-10 rounded-xl bg-black/[0.06] flex items-center justify-center shrink-0">
+                            <Ticket size={18} strokeWidth={2.5} className="text-black/40" />
+                        </div>
+                        <div className="flex-1 text-left">
+                            <span className="text-[14px] font-poppins-bold text-black/70 block">
+                                Van kuponkódod?
+                            </span>
+                            <span className="text-[11px] font-poppins-med text-black/35">
+                                Kattints ide a kuponkód megadásához
+                            </span>
+                        </div>
                         <ArrowRight
-                            size={13}
+                            size={16}
                             strokeWidth={2.5}
-                            className="group-hover:translate-x-0.5 transition-transform duration-200"
+                            className="text-black/30 group-hover:translate-x-0.5 group-hover:text-black/50 transition-all duration-200"
                         />
                     </motion.button>
                 ) : (
@@ -649,8 +657,28 @@ export default function OrderForm() {
                                     </div>
                                 </div>
                             ) : null}
+
+                            {/* ─── Coupon Section (right after product) ─── */}
                             <div>
-                                <SectionHeader icon={User} title="Résztvevő adatai" step={tier.subjects.length > 1 ? 2 : 1} />
+                                <SectionHeader icon={Ticket} title="Kuponkód" step={tier.subjects.length > 1 ? 2 : 1} />
+                                <CouponSection
+                                    couponCode={couponCode}
+                                    setCouponCode={setCouponCode}
+                                    couponStatus={couponStatus}
+                                    setCouponStatus={setCouponStatus}
+                                    couponError={couponError}
+                                    setCouponError={setCouponError}
+                                    discount={discount}
+                                    setDiscount={setDiscount}
+                                    checkCoupon={checkCoupon}
+                                />
+                            </div>
+
+                            <div className="flex items-center gap-4">
+                                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-black/[0.06] to-transparent" />
+                            </div>
+                            <div>
+                                <SectionHeader icon={User} title="Résztvevő adatai" step={tier.subjects.length > 1 ? 3 : 2} />
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <FormInput
                                         required
@@ -693,7 +721,7 @@ export default function OrderForm() {
                             </div>
 
                             <div>
-                                <SectionHeader icon={MapPin} title="Számlázási cím" step={tier.subjects.length > 1 ? 3 : 2} />
+                                <SectionHeader icon={MapPin} title="Számlázási cím" step={tier.subjects.length > 1 ? 4 : 3} />
                                 <div className="space-y-4">
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div className="relative group">
@@ -797,7 +825,7 @@ export default function OrderForm() {
                             </div>
 
                             <div>
-                                <SectionHeader icon={CreditCard} title="Fizetés" step={tier.subjects.length > 1 ? 4 : 3} />
+                                <SectionHeader icon={CreditCard} title="Fizetés" step={tier.subjects.length > 1 ? 5 : 4} />
                                 <div className="space-y-5">
                                     <div className="grid grid-cols-2 gap-3">
                                         <motion.button
@@ -940,17 +968,7 @@ export default function OrderForm() {
                                             </AnimatePresence>
                                         </motion.button>
                                     </div>
-                                    <CouponSection
-                                        couponCode={couponCode}
-                                        setCouponCode={setCouponCode}
-                                        couponStatus={couponStatus}
-                                        setCouponStatus={setCouponStatus}
-                                        couponError={couponError}
-                                        setCouponError={setCouponError}
-                                        discount={discount}
-                                        setDiscount={setDiscount}
-                                        checkCoupon={checkCoupon}
-                                    />
+
                                 </div>
                             </div>
 
@@ -959,23 +977,48 @@ export default function OrderForm() {
                                 layout
                             >
                                 <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-                                    <div className="w-full lg:w-auto flex flex-col items-center lg:items-start space-y-2">
-                                        <span className="text-white/40 font-poppins-bold text-[11px] uppercase tracking-[0.15em]">
-                                            Fizetendő összeg
-                                        </span>
-                                        <div className="flex flex-col items-center lg:items-start">
-                                            <AnimatePresence mode="wait">
+                                    <div className="w-full lg:w-auto flex flex-col items-center lg:items-start space-y-4">
+                                        {/* Mini order summary */}
+                                        <div className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl p-4 space-y-2.5">
+                                            <div className="flex justify-between items-center text-[13px]">
+                                                <span className="text-white/50 font-poppins-med">
+                                                    {selectedProduct === "kombo" ? "Kombo (Történelem + Magyar)" : selectedProduct === "magyar" ? "Magyar kurzus" : "Történelem kurzus"}
+                                                </span>
+                                                <span className="text-white/70 font-poppins-bold">{formatPrice(basePrice)}</span>
+                                            </div>
+                                            <AnimatePresence>
                                                 {discount > 0 && (
                                                     <motion.div
                                                         initial={{ opacity: 0, height: 0 }}
                                                         animate={{ opacity: 1, height: "auto" }}
                                                         exit={{ opacity: 0, height: 0 }}
-                                                        className="text-xl font-poppins-bold text-white/30 line-through mb-1"
+                                                        className="flex justify-between items-center text-[13px]"
                                                     >
-                                                        {formatPrice(basePrice)}
+                                                        <span className="text-green/70 font-poppins-med flex items-center gap-1.5">
+                                                            <Ticket size={12} strokeWidth={2.5} />
+                                                            Kupon ({couponCode})
+                                                        </span>
+                                                        <span className="text-green font-poppins-bold">–{formatPrice(discount)}</span>
                                                     </motion.div>
                                                 )}
                                             </AnimatePresence>
+                                            <div className="h-px bg-white/[0.08]" />
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-white/40 font-poppins-bold text-[11px] uppercase tracking-[0.15em]">
+                                                    Fizetendő
+                                                </span>
+                                                <motion.span
+                                                    key={finalPrice}
+                                                    initial={{ opacity: 0, scale: 0.95 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    className="text-2xl font-poppins-extrab text-white"
+                                                >
+                                                    {formatPrice(finalPrice)}
+                                                </motion.span>
+                                            </div>
+                                        </div>
+                                        {/* Big price display */}
+                                        <div className="flex flex-col items-center lg:items-start w-full">
                                             <motion.div
                                                 key={finalPrice}
                                                 initial={{ opacity: 0, scale: 0.95 }}
