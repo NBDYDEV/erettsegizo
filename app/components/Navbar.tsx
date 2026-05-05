@@ -228,12 +228,11 @@ export default function Navbar() {
                     </a>
                 </div>
                 <div className="hidden md:block flex-shrink-0 z-50 ml-8">
-                    <Link
-                        href="/jelentkezes"
-                        className="bg-nav-button text-white font-poppins-bold hover:brightness-110 px-6 py-3 rounded-full transition-all duration-200"
+                    <span
+                        className="bg-gray-500 text-white/60 font-poppins-bold px-6 py-3 rounded-full cursor-not-allowed"
                     >
-                        Jelentkezem
-                    </Link>
+                        Lezárult
+                    </span>
                 </div>
 
                 <div className="block md:hidden z-50 flex-shrink-0">
@@ -286,13 +285,11 @@ export default function Navbar() {
                 >
                     GYIK
                 </a>
-                <Link
-                    href="/jelentkezes"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="bg-green text-black font-poppins-extrab text-xl px-10 py-4 rounded-full transition-all duration-200 hover:brightness-110 mt-4"
+                <span
+                    className="bg-gray-500 text-white/60 font-poppins-extrab text-xl px-10 py-4 rounded-full mt-4 cursor-not-allowed"
                 >
-                    Jelentkezem
-                </Link>
+                    Lezárult
+                </span>
             </div>
         </>
     );

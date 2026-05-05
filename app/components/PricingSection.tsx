@@ -100,12 +100,11 @@ export default function PricingSection() {
                         <NavCountdown dark large />
                     </div>
 
-                    <Link
-                        href="/jelentkezes"
-                        className="bg-[#cc2b20] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg cursor-pointer"
+                    <span
+                        className="bg-gray-300 text-gray-500 font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full flex flex-col items-center justify-center cursor-not-allowed"
                     >
-                        <span>Jelentkezem</span>
-                    </Link>
+                        <span>A jelentkezés lezárult</span>
+                    </span>
                 </div>
 
                 <div className="w-full max-w-5xl mt-32 flex flex-col items-center">

@@ -42,7 +42,7 @@ export default function Footer() {
                             )}
                             <Link href="#tortenelem" className="hover:text-white transition-colors duration-300">Történelem</Link>
                             <Link href="#gyik" className="hover:text-white transition-colors duration-300">GYIK</Link>
-                            <Link href="/jelentkezes" className="hover:text-white transition-colors duration-300 text-green font-poppins-bold">Jelentkezés</Link>
+                            <span className="text-white/30 font-poppins-bold cursor-not-allowed">Jelentkezés lezárult</span>
                         </div>
                     )}
 

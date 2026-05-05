@@ -83,12 +83,11 @@ export default function Hero() {
                             <span className="font-poppins-bold text-white/90">Az érettségi előtti este, Online formában, 16:30 és 21:00 között</span> végigmegyünk a teljes anyagon, hogy másnapra minden a helyén legyen a fejedben.
                         </p>
 
-                        <Link
-                            href="/jelentkezes"
-                            className="bg-green text-black font-poppins-bold text-sm md:text-base px-8 py-5 rounded-full w-full sm:w-fit hover:scale-105 transition-transform flex items-center justify-center cursor-pointer"
+                        <span
+                            className="bg-gray-300 text-gray-500 font-poppins-bold text-sm md:text-base px-8 py-5 rounded-full w-full sm:w-fit flex items-center justify-center cursor-not-allowed"
                         >
-                            Ott a helyem az utolsó esti ismétlésen
-                        </Link>
+                            A jelentkezés lezárult
+                        </span>
 
                         <div className="flex items-center justify-center lg:justify-start gap-4 mt-2 lg:mt-6 w-full">
                             <div className="flex -space-x-3">

@@ -62,12 +62,11 @@ export default function FAQ2() {
                         transition={{ duration: 0.5 }}
                         className="mb-16 md:mb-24"
                     >
-                        <Link
-                            href="/jelentkezes"
-                            className="bg-[#cc2b20] text-white font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full hover:scale-105 transition-transform flex flex-col items-center justify-center shadow-lg cursor-pointer"
+                        <span
+                            className="bg-gray-300 text-gray-500 font-poppins-bold text-sm md:text-lg px-8 md:px-12 py-4 md:py-5 rounded-full flex flex-col items-center justify-center cursor-not-allowed"
                         >
-                            <span>Jelentkezem</span>
-                        </Link>
+                            <span>A jelentkezés lezárult</span>
+                        </span>
                     </motion.div>
                 )}
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16 xl:gap-20 justify-start">
